@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float baseGravityMultipler;
     [SerializeField] private float fallGravityMultiplier;
+    [SerializeField] private float coyoteTime;
+    private float coyTime;
 
     Vector2 input;
     Vector2 velocity;
@@ -40,28 +42,35 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        isGrounded = Physics.OverlapBox(groundCheckCenter.position, groundCheckBoxSize / 2f, Quaternion.identity, whatIsGround).Length > 0 && rb.velocity.y <= 0;
+        isGrounded = Physics.OverlapBox(groundCheckCenter.position, groundCheckBoxSize * .5f, Quaternion.identity, whatIsGround).Length > 0 && rb.velocity.y <= 0;
 
-        if (isGrounded && Input.GetKey(KeyCode.Space))
+        if (!isGrounded && coyTime > 0f) coyTime -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && coyTime >= 0f)
         {
             velocity.y = jumpSpeed;
+            fallSpeed = 0f;
         }
         else if (!reachedJumpPeak && Input.GetKeyUp(KeyCode.Space))
         {
             reachedJumpPeak = true;
-            velocity.y *= .5f;
+            velocity.y *= .25f;
         }
         else if (velocity.y <= 0f)
         {
+            reachedJumpPeak = true;
             fallSpeed += Physics.gravity.y * (fallGravityMultiplier - 1f) * Time.deltaTime;
         }
 
-        if (isGrounded)
+        else fallSpeed = Mathf.Clamp(fallSpeed + baseGravityMultipler * Physics.gravity.y * Time.deltaTime, -maxFallSpeed, 0f);
+
+        if (isGrounded && velocity.y <= 0f)
         {
             fallSpeed = 0f;
             reachedJumpPeak = false;
+            velocity.y = 0f;
+            coyTime = coyoteTime;
         }
-        else fallSpeed = Mathf.Clamp(fallSpeed + baseGravityMultipler * Physics.gravity.y * Time.deltaTime, -maxFallSpeed, 0f);
 
         velocity.x = Mathf.SmoothDamp(velocity.x, input.x * moveSpeed, ref currXVel, xVelSmoothTime);
         velocity.y += fallSpeed;
