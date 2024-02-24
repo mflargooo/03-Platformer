@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.5, z: 0}
-  m_LookaheadTime: 0.4
+  m_TrackedObjectOffset: {x: 0, y: 3, z: 0}
+  m_LookaheadTime: 0.5
   m_LookaheadSmoothing: 0.4
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 12
-  m_DeadZoneWidth: 0.075
-  m_DeadZoneHeight: 0.125
+  m_DeadZoneWidth: 0.05
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1945217960}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -276,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 582422388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000029802322, y: 3, z: -12}
+  m_LocalPosition: {x: 0.00000035762787, y: 4.5, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -495,7 +495,7 @@ Camera:
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -520,7 +520,7 @@ Transform:
   m_GameObject: {fileID: 1557067528}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000029802322, y: 3, z: -12}
+  m_LocalPosition: {x: 0.00000035762787, y: 4.5, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -728,16 +728,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xVelSmoothTime: 0.1
   moveSpeed: 6
-  jumpSpeed: 12
-  baseGravityMultipler: 1
-  fallGravityMultiplier: 3
+  jumpSpeed: 14
+  baseGravityMultiplier: 3
+  fallGravityMultiplier: 4
   coyoteTime: 0.2
-  maxFallSpeed: 7
+  maxFallSpeed: 20
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  groundCheckBoxSize: {x: 0.9, y: 0.25, z: 0.9}
-  groundCheckCenter: {fileID: 987966623}
+  groundCheckDist: 0.01
 --- !u!54 &1945217962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -779,7 +778,7 @@ GameObject:
   - component: {fileID: 1948154872}
   m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -865,7 +864,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 50, y: 5, z: 1}
+  m_LocalScale: {x: 50, y: 5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
