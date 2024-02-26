@@ -731,7 +731,7 @@ MonoBehaviour:
   jumpSpeed: 14
   baseGravityMultiplier: 3
   fallGravityMultiplier: 4
-  coyoteTime: 0.2
+  coyoteTime: 1
   maxFallSpeed: 20
   whatIsGround:
     serializedVersion: 2
