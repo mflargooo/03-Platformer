@@ -21,6 +21,12 @@ RELEASE NOTES
 
 ATTRIBUTIONS 
 
+        () Audio:
+
+                - KK Slider soundpack: https://tehmerow.itch.io/kk-slider-sfz?download
+                - Midi piano notes: https://freesound.org/people/ion_/packs/31585/
+                - Text to animalese converter: https://acedio.github.io/animalese.js/
+
         () Fonts: 
                 
                 - "Ubuntu" by Dalton Maag: https://fonts.google.com/specimen/Ubuntu
@@ -29,3 +35,5 @@ ATTRIBUTIONS
 
                 - Image tracer by Dave Williames
                 - Glow by Alex Widua
+                - Shaper by Anna Voshkarina 
+                - Background art: https://craftpix.net/freebies ocean-and-clouds-free-pixel-art-backgrounds/
