@@ -40,4 +40,14 @@ public class GridManager : MonoBehaviour
     {
         return grid;
     }
+
+    public float GetTileSpacing()
+    {
+        return tileSpacing;
+    }
+
+    public float GetTileSize()
+    {
+        return tileSize;
+    }
 }

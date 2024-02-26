@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GenerateTrack : MonoBehaviour
 {
-    public static List<Cell> randomPath (Cell[,] grid, int si, int sj)
+    public static List<Cell> randomPath (Cell[,] grid, int si, int sj, int maxTracks)
     {
         int dir = -1;
         int gridSize = Mathf.RoundToInt(Mathf.Sqrt(grid.Length));
 
         List<Cell> path = new List<Cell>();
         path.Add(grid[si, sj]);
+        grid[si, sj].SetSearched(true);
 
-        while (sj < gridSize - 1)
+        while (sj < gridSize - 1 && maxTracks > 0)
         {
             dir = Random.Range(0, 3);
             if(dir == 0 && si > 1 /* left */)
@@ -35,7 +36,18 @@ public class GenerateTrack : MonoBehaviour
             {
                 grid[si, sj].SetSearched(true);
                 path.Add(grid[si, sj]);
+                maxTracks--;
             }
+        }
+
+        while (sj < gridSize)
+        {
+            if (!path.Contains(grid[si, sj]))
+            {
+                grid[si, sj].SetSearched(true);
+                path.Add(grid[si, sj]);
+            }
+            sj++;
         }
 
         return path;

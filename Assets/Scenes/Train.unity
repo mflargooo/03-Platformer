@@ -428,6 +428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58096cef91428bd4db64b0bea63a9048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tmp: {fileID: 2100000, guid: ac0d20b3d0b7d4449a815f5cd5ede588, type: 2}
+  cellPrefab: {fileID: 4533705345644662075, guid: 76b36b319b50716409ef3e736396ee7c,
+    type: 3}
+  maxTracks: 11
 --- !u!1 &1624813421
 GameObject:
   m_ObjectHideFlags: 0
