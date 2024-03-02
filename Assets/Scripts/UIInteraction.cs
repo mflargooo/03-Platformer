@@ -7,6 +7,9 @@ public class UIInteraction : MonoBehaviour, IPointerEnterHandler
 {
     public AudioSource audioSource;
     public string MusicDifficulty = null;
+    public Inventory inventory1;
+    public Inventory inventory2;
+    public int slotIndex;
 
     void Start()
     {
@@ -57,5 +60,13 @@ public class UIInteraction : MonoBehaviour, IPointerEnterHandler
     {
         MusicDifficulty = difficulty;
     }
+
+    public void OnMouseDwon(PointerEventData eventData)
+    {
+        inventory1.OnSlotClicked(slotIndex);
+        print("eepy");
+    }
 }
+
+
 
