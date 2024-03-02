@@ -17,24 +17,41 @@ public class CollectManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            PlaySound();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CollectItem();
+        }
+    }
 
-            if (Physics.Raycast(ray, out hit))
+    void PlaySound()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            AudioSource audioSource = hit.transform.GetComponent<AudioSource>();
+            if (audioSource != null && audioSource.clip != null)
             {
-                AudioSource audioSource = hit.transform.GetComponent<AudioSource>();
-                if (hit.transform.CompareTag("Cube"))
-                {
-                    inventory.AddItemToInventory();
-                    hit.transform.gameObject.SetActive(false);
-                    Camera.main.GetComponent<AudioSource>().PlayOneShot(audioSource.clip);
-                }
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(audioSource.clip);
+            }
+        }
+    }
+
+    void CollectItem()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.CompareTag("Cube"))
+            {
+                inventory.AddItemToInventory();
+                hit.transform.gameObject.SetActive(false);
             }
         }
     }
 }
-
-
-
-
-
