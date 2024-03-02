@@ -23,9 +23,20 @@ public class UIInteraction : MonoBehaviour, IPointerEnterHandler
             AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
             foreach (var source in allAudioSources)
             {
-                if (source != audioSource) {source.Stop();}
+                if (source != audioSource) 
+                {
+                    source.Stop();
+                }
             }
             audioSource.Play();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)//cannot be excuted
+    {
+        if (audioSource != null)
+        {
+            audioSource.Stop();
         }
     }
     public void OnPointerClickEasy(PointerEventData eventData)
