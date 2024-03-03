@@ -148,11 +148,11 @@ Transform:
   m_GameObject: {fileID: 357737576}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -5.5, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 0.25, y: -1.375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 662547624}
+  m_Father: {fileID: 527414096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440590323
 GameObject:
@@ -254,8 +254,6 @@ GameObject:
   - component: {fileID: 527414098}
   - component: {fileID: 527414097}
   - component: {fileID: 527414099}
-  - component: {fileID: 527414100}
-  - component: {fileID: 527414101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -277,6 +275,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662547624}
+  - {fileID: 357737577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &527414097
@@ -363,63 +362,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f693b529051d4c4a8a6b8a0459fd31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xVelSmoothTime: 0
-  moveSpeed: 0
-  jumpSpeed: 0
-  baseGravityMultiplier: 0
-  fallGravityMultiplier: 0
-  coyoteTime: 0
-  maxFallSpeed: 0
+  xVelSmoothTime: 0.1
+  moveSpeed: 6
+  jumpSpeed: 14
+  baseGravityMultiplier: 3
+  fallGravityMultiplier: 4
+  coyoteTime: 0.4
+  maxFallSpeed: 20
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  groundCheckPoint: {fileID: 0}
-  groundCheckDist: 0
---- !u!114 &527414100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527414095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb670df3c5db92418acf2f51c8498b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xVelSmoothTime: 0.1
-  moveSpeed: 6
-  jumpSpeed: 14
-  baseGravityMultiplier: 3
-  fallGravityMultiplier: 4
-  coyoteTime: 0.4
-  maxFallSpeed: 20
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  groundCheckDist: 0.01
---- !u!114 &527414101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527414095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb670df3c5db92418acf2f51c8498b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xVelSmoothTime: 0.1
-  moveSpeed: 6
-  jumpSpeed: 14
-  baseGravityMultiplier: 3
-  fallGravityMultiplier: 4
-  coyoteTime: 0.4
-  maxFallSpeed: 20
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
+  groundCheckPoint: {fileID: 357737577}
   groundCheckDist: 0.01
 --- !u!1 &582422388
 GameObject:
@@ -558,11 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7409025644819333202, guid: 37f208a379228774aa675193954f525d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 357737577}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f208a379228774aa675193954f525d, type: 3}
 --- !u!4 &662547624 stripped
