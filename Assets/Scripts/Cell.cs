@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-
-    public void Interact(GameObject obj)
-    {
-
-    }
     public float weight { get; private set; }
     public bool searched { get; private set; }
 
