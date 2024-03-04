@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Track : Cell
 {
-    public int correctRotation { get; private set; }
+    /* 0 is left, 1 is straight, 2 is right */
+    public int pieceType;
+    public int correctRotation;
+
+    public bool isCorrect;
     public void Rotate()
     {
-        Debug.Log("ROTATED " + name + "!!!!!");
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, (transform.eulerAngles.y + 90f) % 360f, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.RoundToInt((transform.eulerAngles.y + 90) % 360), transform.eulerAngles.z);
+        isCorrect = IsRotatedCorrectly();
     }
 
-    public void SetCorrectRotation()
+    public void SetPieceType(int type)
     {
+        pieceType = type;
 
+    }
+
+    public void SetCorrectRotation(int rotation)
+    {
+        correctRotation = rotation;
     }
 
     public bool IsRotatedCorrectly()
     {
-        return correctRotation == transform.eulerAngles.y;
+        isCorrect = (correctRotation == Mathf.RoundToInt(transform.eulerAngles.y)) || (pieceType == 1 && (correctRotation == Mathf.RoundToInt((transform.eulerAngles.y + 180) % 360)));
+        return isCorrect;
     }
 }
