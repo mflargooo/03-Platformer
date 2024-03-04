@@ -6,6 +6,7 @@ public class PlayerController2D : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float currXVel;
+    [Header("Movement")]
     [SerializeField] private float xVelSmoothTime;
 
     [SerializeField] private float moveSpeed;
@@ -26,6 +27,11 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckDist;
 
+    [Header("Animation and Model")]
+    [SerializeField] private Animator anim;
+    [SerializeField] private GameObject model;
+    private float inAirAngleVel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,16 +43,17 @@ public class PlayerController2D : MonoBehaviour
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Movement();
+        AnimationParams();
     }
 
     void Movement()
     {
         RaycastHit2D hit = Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckDist,  whatIsGround);
-        if (hit) print(hit.collider.name);
         isGrounded = (hit.collider != null && hit.collider.tag == "Ground");
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)
         {
+            model.transform.eulerAngles = Vector3.zero;
             velocity.y = jumpSpeed;
             coyTime = 0f;
         }
@@ -55,13 +62,13 @@ public class PlayerController2D : MonoBehaviour
             velocity.y *= .35f;
             reachedJumpPeak = true;
         }
-        else if (rb.velocity.y <= 0f && !isGrounded)
+        else if (velocity.y <= 0f && !isGrounded)
         {
             reachedJumpPeak = true;
             velocity.y += Physics.gravity.y * (fallGravityMultiplier - baseGravityMultiplier) * Time.deltaTime;
         }
 
-        if (isGrounded && coyTime <= 0f)
+        if (isGrounded && coyTime <= 0f && velocity.y <= 0)
         {
             coyTime = coyoteTime;
         }
@@ -84,6 +91,15 @@ public class PlayerController2D : MonoBehaviour
 
         velocity.x = Mathf.SmoothDamp(velocity.x, input.x * moveSpeed, ref currXVel, xVelSmoothTime);
         rb.velocity = velocity;
+    }
+
+    void AnimationParams()
+    {
+        transform.localScale = input.x != 0 ? new Vector3(input.x, 1f, 1f) : transform.localScale;
+        model.transform.rotation = Quaternion.Euler(Vector3.forward * Mathf.SmoothDampAngle(model.transform.rotation.eulerAngles.z, 1.5f * transform.localScale.x * rb.velocity.y, ref inAirAngleVel, .1f));
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("Speed X", Mathf.Abs(velocity.x));
+        anim.SetFloat("Velocity Y", velocity.y);
     }
 
     private void OnDrawGizmos()
