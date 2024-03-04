@@ -47,7 +47,7 @@ public class CollectManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.CompareTag("Cube"))
+            if (hit.transform.CompareTag("Interacting"))
             {
                 inventory.AddItemToInventory();
                 hit.transform.gameObject.SetActive(false);
