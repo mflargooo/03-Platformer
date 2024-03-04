@@ -32,7 +32,6 @@ public class TrainManager : MonoBehaviour
         for (int i = 0; i < path.Count; i++)
         {
             path[i].name = "Path: " + i.ToString();
-            path[i].transform.position += Vector3.up;
             path[i].transform.parent = pathParent.transform;
             path[i].GetComponent<MeshRenderer>().material = tmp;
         }
