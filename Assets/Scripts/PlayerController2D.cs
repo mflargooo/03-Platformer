@@ -42,6 +42,7 @@ public class PlayerController2D : MonoBehaviour
     void Movement()
     {
         RaycastHit2D hit = Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckDist,  whatIsGround);
+        if (hit) print(hit.collider.name);
         isGrounded = (hit.collider != null && hit.collider.tag == "Ground");
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)
@@ -69,7 +70,7 @@ public class PlayerController2D : MonoBehaviour
             coyTime -= Time.deltaTime;
         }
 
-        if (isGrounded && velocity.y < 0f)
+        if (isGrounded && velocity.y <= 0f)
         {
             reachedJumpPeak = false;
             velocity.y = 0;
