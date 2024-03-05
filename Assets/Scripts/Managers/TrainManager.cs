@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TrainManager : MonoBehaviour
 {
     Cell[,] grid;
-    [SerializeField] private Material tmp;
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private int maxTracks;
     [SerializeField] private float randDestroyTrackPercent;
+    [SerializeField] private float completeTime;
+    private float timer;
+
+    [SerializeField] private TMP_Text timerText;
+    private bool ended;
+    private bool cabooseFailed;
 
     /* 0 is left, 1 is right, 2 is left */
     [SerializeField] private Material[] tracks;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject caboosePrefab;
+    [SerializeField] private float cabooseSpeed;
+
+    private List<Track> path;
+    private List<GameObject> cabooses = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        timer = completeTime + .999f;
         GridManager gridManager = FindObjectOfType<GridManager>();
         grid = GridManager.GetGrid();
         float tileSpacing = gridManager.GetTileSpacing();
@@ -26,15 +39,19 @@ public class TrainManager : MonoBehaviour
             c.SetWeight(Random.Range(0f, 20f));
         }
 
-        List<Track> path = GenerateTrack.randomPath(grid, Random.Range(2, gridSize - 2), 0, maxTracks);
+        path = GenerateTrack.randomPath(grid, Random.Range(2, gridSize - 2), 0, maxTracks);
         
         Track src = Instantiate(cellPrefab, path[0].transform.position - Vector3.forward * (tileSpacing + tileSize), cellPrefab.transform.rotation).GetComponent<Track>();
+        Track dst = Instantiate(cellPrefab, path[path.Count-1].transform.position + Vector3.forward * (tileSpacing + tileSize), cellPrefab.transform.rotation).GetComponent<Track>();
         
         src.SetPieceType(1);
+        src.GetComponent<MeshRenderer>().material = tracks[1];
         src.SetCorrectRotation(0);
         src.IsRotatedCorrectly();
+        src.Lock();
 
         path.Insert(0, src);
+        path.Add(dst);
 
         GameObject pathParent = new GameObject();
         pathParent.name = "Path";
@@ -43,7 +60,6 @@ public class TrainManager : MonoBehaviour
         {
             path[i].name = "Path: " + i.ToString();
             path[i].transform.parent = pathParent.transform;
-            path[i].GetComponent<MeshRenderer>().material = tmp;
         }
 
         foreach (Cell c in grid)
@@ -77,8 +93,67 @@ public class TrainManager : MonoBehaviour
             curr.IsRotatedCorrectly();
         }
 
-        path[path.Count - 1].SetPieceType(1);
-        path[path.Count - 1].GetComponent<MeshRenderer>().material = tracks[1];
-        path[path.Count - 1].IsRotatedCorrectly();
+        dst.SetPieceType(1);
+        dst.GetComponent<MeshRenderer>().material = tracks[1];
+        dst.SetCorrectRotation(0);
+        dst.IsRotatedCorrectly();
+        dst.transform.eulerAngles = new Vector3(90, 0, transform.eulerAngles.z);
+        dst.Lock();
+    }
+
+    private void Update()
+    {
+        if (timer >= 1f)
+        {
+            timer -= Time.deltaTime;
+            timerText.text = ((int)timer).ToString();
+        }
+        else if (!ended)
+        {
+            ended = true;
+            timerText.text = ((int)timer).ToString();
+            Destroy(player);
+            StartCoroutine(SpawnCaboose());
+        }
+    }
+
+    private IEnumerator SpawnCaboose()
+    {
+        for (int i = 0; i < 3 && !cabooseFailed; i++)
+        {
+            GameObject caboose = Instantiate(caboosePrefab, path[0].transform.position + Vector3.up * .01f - Vector3.forward * 1f, caboosePrefab.transform.rotation);
+            cabooses.Add(caboose);
+            caboose.transform.parent = transform;
+            caboose.name = "Caboose " + i.ToString();
+            StartCoroutine(Caboose(caboose));
+            yield return new WaitForSeconds(1f / cabooseSpeed);
+        }
+    }
+
+    private IEnumerator Caboose(GameObject caboose)
+    {
+        Rigidbody rb = caboose.GetComponent<Rigidbody>();
+        int i = 0;
+        while (i < path.Count && !cabooseFailed)
+        {
+            Track target = path[i];
+            cabooseFailed = !target.IsRotatedCorrectly();
+
+            Vector3 toTarget = target.transform.position + Vector3.up * .01f - caboose.transform.position;
+            while (toTarget.magnitude > .1f && !cabooseFailed)
+            {
+                rb.velocity = toTarget.normalized * cabooseSpeed;
+                yield return null;
+                toTarget = target.transform.position + Vector3.up * .01f - caboose.transform.position;
+            }
+            i++;
+        }
+
+        if (i < path.Count)
+        {
+            rb.velocity = Vector3.zero;
+            Debug.Log(caboose.name + " ended with Fail");
+        }
+        else Debug.Log(caboose.name + " ended with Success");
     }
 }
