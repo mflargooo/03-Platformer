@@ -24,7 +24,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("Grounded")]
     private bool isGrounded;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private Transform[] groundCheckPoints;
     [SerializeField] private float groundCheckDist;
 
     [Header("Animation and Model")]
@@ -32,6 +32,11 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private GameObject model;
     private float inAirAngleVel;
 
+    [SerializeField] private GameObject jumpParticles;
+    [SerializeField] private GameObject landParticles;
+
+    private GameObject landPartsInstance;
+    private Vector3 avgGroundCheck;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +47,26 @@ public class PlayerController2D : MonoBehaviour
     void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        avgGroundCheck = Vector3.zero;
+        foreach (Transform gc in groundCheckPoints)
+        {
+            avgGroundCheck += gc.position;
+        }
+        avgGroundCheck /= groundCheckPoints.Length;
         Movement();
         AnimationParams();
     }
 
     void Movement()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckDist,  whatIsGround);
-        isGrounded = (hit.collider != null && hit.collider.tag == "Ground");
+        RaycastHit2D hitBack = Physics2D.Raycast(groundCheckPoints[0].position, Vector2.down, groundCheckDist,  whatIsGround);
+        RaycastHit2D hitFront = Physics2D.Raycast(groundCheckPoints[1].position, Vector2.down, groundCheckDist, whatIsGround);
+        isGrounded = (hitBack.collider != null && hitBack.collider.tag == "Ground") || (hitFront.collider != null && hitFront.collider.tag == "Ground");
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)
         {
+            Destroy(Instantiate(jumpParticles, avgGroundCheck - Vector3.forward * 3f, jumpParticles.transform.rotation), 3f);
+            Destroy(landPartsInstance);
             model.transform.eulerAngles = Vector3.zero;
             velocity.y = jumpSpeed;
             coyTime = 0f;
@@ -79,6 +93,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (isGrounded && velocity.y <= 0f)
         {
+            if (!landPartsInstance) landPartsInstance = Instantiate(landParticles, avgGroundCheck - Vector3.forward * 3f, jumpParticles.transform.rotation);
             reachedJumpPeak = false;
             velocity.y = 0;
         }
@@ -107,7 +122,8 @@ public class PlayerController2D : MonoBehaviour
         if (rb)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + Vector3.down * groundCheckDist);
+            Gizmos.DrawLine(avgGroundCheck, avgGroundCheck + Vector3.down * groundCheckDist);
+            Gizmos.DrawLine(avgGroundCheck, avgGroundCheck + Vector3.down * groundCheckDist);
         }
     }
 }
