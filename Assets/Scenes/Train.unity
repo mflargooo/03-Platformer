@@ -633,10 +633,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58096cef91428bd4db64b0bea63a9048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleSize: 7
+  randomlyGenerate: 0
+  puzzleCodes:
+  - 7,14,51324107991843(2)9(3)649054(1)0(4)52(8)9(9)6710(5)1(6)4(7)0(10)1(11)6016088(12)5287895(13)1(14)4
   cellPrefab: {fileID: 4533705345644662075, guid: 76b36b319b50716409ef3e736396ee7c,
     type: 3}
-  maxTracks: 7
-  randDestroyTrackPercent: 0.125
+  maxTracks: 15
+  randDestroyTrackPercent: 0.25
   completeTime: 20
   timerText: {fileID: 287409159}
   tracks:
@@ -646,7 +650,7 @@ MonoBehaviour:
   player: {fileID: 2012887863}
   caboosePrefab: {fileID: 5281402578870869116, guid: 47f08c5097cb57b4bacc15132b8ea025,
     type: 3}
-  cabooseSpeed: 1
+  cabooseSpeed: 3
 --- !u!1 &1624813421
 GameObject:
   m_ObjectHideFlags: 0

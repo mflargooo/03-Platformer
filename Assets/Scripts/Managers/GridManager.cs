@@ -10,11 +10,10 @@ public class GridManager : MonoBehaviour
     [SerializeField] private float tileSize;
     [SerializeField] private float tileSpacing;
 
-    private static Cell[,] grid;
     // Start is called before the first frame update
-    void Awake()
+    public Cell[,] SpawnGrid(int gridSize)
     {
-        grid = new Cell[gridSize, gridSize];
+        Cell[,] grid = new Cell[gridSize, gridSize];
         GameObject gridHolder = new GameObject();
         gridHolder.transform.parent = transform;
         gridHolder.name = "Grid";
@@ -34,10 +33,7 @@ public class GridManager : MonoBehaviour
                 cell.name = r.ToString();
             }
         }
-    }
 
-    public static Cell[,] GetGrid()
-    {
         return grid;
     }
 
