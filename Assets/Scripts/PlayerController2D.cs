@@ -21,8 +21,8 @@ public class PlayerController2D : MonoBehaviour
     bool reachedJumpPeak;
     [SerializeField] private float maxFallSpeed;
 
+    public bool isGrounded { get; private set; }
     [Header("Grounded")]
-    private bool isGrounded;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform[] groundCheckPoints;
     [SerializeField] private float groundCheckDist;
