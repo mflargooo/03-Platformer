@@ -634,13 +634,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleSize: 7
-  randomlyGenerate: 0
+  randomlyGenerate: 1
   puzzleCodes:
-  - 7,14,51324107991843(2)9(3)649054(1)0(4)52(8)9(9)6710(5)1(6)4(7)0(10)1(11)6016088(12)5287895(13)1(14)4
+  - 3,4,4446(3)9(4)4(1)4(2)05
   cellPrefab: {fileID: 4533705345644662075, guid: 76b36b319b50716409ef3e736396ee7c,
     type: 3}
   maxTracks: 15
-  randDestroyTrackPercent: 0.25
+  randDestroyTrackPercent: 0
   completeTime: 20
   timerText: {fileID: 287409159}
   tracks:
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundary: {x: 4.5, y: 4.5}
-  moveSpeed: 4
+  moveSpeed: 6
   lookOffset: 0.18
 --- !u!54 &2012887867
 Rigidbody:

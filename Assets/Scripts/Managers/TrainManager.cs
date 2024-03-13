@@ -151,7 +151,7 @@ public class TrainManager : MonoBehaviour
         }
 
         /* Randomize correct path rotations */
-        for (int i = 0; i < path.Count; i++)
+        for (int i = 1; i < path.Count - 1; i++)
         {
             path[i].transform.eulerAngles = new Vector3(90, Random.Range(0, 4) * 90, transform.eulerAngles.z);
             path[i].IsRotatedCorrectly();

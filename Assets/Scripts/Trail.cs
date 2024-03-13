@@ -44,7 +44,7 @@ public class Trail : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity != Vector2.zero)
+        if (rb.velocity.magnitude >= .1f)
         {
             gotStopMovingPoint = false;
             if (timer <= 0f)
@@ -70,7 +70,7 @@ public class Trail : MonoBehaviour
         Vector3 toFollow = curr.Value.position;
         while (true)
         {
-            if (rb.velocity != Vector2.zero || !curr.Value.groundNode)
+            if (rb.velocity.magnitude >= .1f || !curr.Value.groundNode)
             {
                 obj.transform.position = Vector3.MoveTowards(obj.transform.position, toFollow, maxMoveDistance);
 
