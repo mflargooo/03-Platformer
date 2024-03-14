@@ -25,11 +25,11 @@ Transform:
   m_GameObject: {fileID: 5848347203213409414}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.95, y: -1.375, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.99, y: -5.5, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8143392024899825450}
+  m_Father: {fileID: 4572884934791995363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6130176090833386193
 GameObject:
@@ -56,11 +56,11 @@ Transform:
   m_GameObject: {fileID: 6130176090833386193}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.38, y: -1.375, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.52, y: -5.5, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8143392024899825450}
+  m_Father: {fileID: 4572884934791995363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7755082650308876408
 GameObject:
@@ -95,8 +95,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4572884934791995363}
-  - {fileID: 9114243707209968782}
-  - {fileID: 5473553597600884052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4132949161975203670
@@ -158,7 +156,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21641266, y: -0.49270082}
+  m_Offset: {x: 0.17964172, y: -0.49270082}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -169,7 +167,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.345268, y: 1.751442}
+  m_Size: {x: 1.747715, y: 1.751442}
   m_EdgeRadius: 0
 --- !u!114 &971598592356303947
 MonoBehaviour:
@@ -268,7 +266,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7409025644819333202, guid: 37f208a379228774aa675193954f525d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9114243707209968782}
+    - targetCorrespondingSourceObject: {fileID: 7409025644819333202, guid: 37f208a379228774aa675193954f525d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5473553597600884052}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f208a379228774aa675193954f525d, type: 3}
 --- !u!1 &2429507378622360912 stripped

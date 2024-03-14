@@ -61,7 +61,7 @@ public class PlayerController2D : MonoBehaviour
     {
         RaycastHit2D hitBack = Physics2D.Raycast(groundCheckPoints[0].position, Vector2.down, groundCheckDist,  whatIsGround);
         RaycastHit2D hitFront = Physics2D.Raycast(groundCheckPoints[1].position, Vector2.down, groundCheckDist, whatIsGround);
-        isGrounded = (hitBack.collider != null && hitBack.collider.tag == "Ground") || (hitFront.collider != null && hitFront.collider.tag == "Ground");
+        isGrounded = (hitBack.collider != null && hitBack.collider.tag == "Ground") || (hitFront.collider != null && hitFront.collider.tag == "Ground") && rb.velocity.magnitude <= .1f;
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)
         {
@@ -97,7 +97,7 @@ public class PlayerController2D : MonoBehaviour
             reachedJumpPeak = false;
             velocity.y = 0;
         }
-        else
+        else if (!isGrounded)
         {
             velocity.y += Physics.gravity.y * baseGravityMultiplier * Time.deltaTime;
         }
