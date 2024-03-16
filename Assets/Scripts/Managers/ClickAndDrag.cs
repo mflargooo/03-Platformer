@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ClickAndDrag : MonoBehaviour
 {
-    public Selectable selectedGameObject;
+    private Selectable selectedGameObject;
     Ray mouseRay;
     private RaycastHit[] hits;
 
+    [SerializeField] private Transform defaultParent;
     [SerializeField] private float clickDetectRange;
     [SerializeField] private float selectedObjDepth;
-    private Camera cam;
+    [SerializeField] private Camera cam;
 
     public void SetCamera(Camera cam)
     {
@@ -81,13 +82,13 @@ public class ClickAndDrag : MonoBehaviour
             if (otherSelectable)
             {
                 otherSelectable.ResetPos();
-                otherSelectable.transform.parent = null;
+                otherSelectable.transform.parent = defaultParent;
             }
         }
         else
         {
             selectedGameObject.ResetPos();
-            selectedGameObject.transform.parent = null;
+            selectedGameObject.transform.parent = defaultParent;
             DeselectGameObject();
         }
     }
@@ -115,14 +116,14 @@ public class ClickAndDrag : MonoBehaviour
             {
                 Swap(selectedGameObject, slot);
             }
-            else if (otherSelectable && selectedGameObject.transform.parent)
+            else if (otherSelectable && selectedGameObject.transform.parent.tag == "Slot")
             {
                 Swap(otherSelectable, selectedGameObject.transform.parent.gameObject);
             }
             else
             {
                 selectedGameObject.ResetPos();
-                selectedGameObject.transform.parent = null;
+                selectedGameObject.transform.parent = defaultParent;
             }
             DeselectGameObject();
         }
@@ -137,22 +138,21 @@ public class ClickAndDrag : MonoBehaviour
         }
         catch
         {
-            slotCurrObj = null;
+            slotCurrObj = null; 
         }
         Transform selectedParent = selected.transform.parent;
 
-        if (slotCurrObj && selectedParent)
+        if (slotCurrObj && selectedParent.tag == "Slot")
         {
             slotCurrObj.transform.parent = selectedParent;
             slotCurrObj.transform.localPosition = -Vector3.forward * .5f;
         }
-        else if (slotCurrObj && !selectedParent)
+        else if (slotCurrObj)
         {
-            slotCurrObj.transform.parent = null;
+            slotCurrObj.transform.parent = defaultParent;
             slotCurrObj.GetComponent<Selectable>().ResetPos();
 
         }
-
         selected.transform.parent = slot.transform;
         selected.transform.localPosition = -Vector3.forward * .5f;
     }

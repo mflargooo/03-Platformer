@@ -29,24 +29,18 @@ public class KaraokeManager : MonoBehaviour
     private GameObject slotsParent;
     private GameObject[] slots;
 
-    private ClickAndDrag cad;
-    private CollectedCapybaraManager ccm;
+    [SerializeField] private ClickAndDrag cad;
+    [SerializeField] private CollectedCapybaraManager ccm;
 
     private int[] solution;
-    private AudioClip[] notes;
+    public static AudioClip[] notes;
     private AudioClip correct;
 
     [SerializeField] private Button verifyButton;
 
     private void Start()
     {
-        cad = GetComponent<ClickAndDrag>();
-        ccm = GetComponent<CollectedCapybaraManager>();
         EasyPuzzle();
-        cad.SetCamera(slotsCamera);
-        ccm.SetReferenceCamera(slotsCamera);
-        ccm.DeactivateCapybaraList();
-        ccm.SetupList();
         ccm.ActivateCapybaraList();
     }
 
@@ -92,11 +86,6 @@ public class KaraokeManager : MonoBehaviour
             slotInstance.transform.parent = slotsParent.transform;
             slots[i] = slotInstance;
         }
-    }
-
-    public AudioClip GetNote(int i)
-    {
-        return notes[i];
     }
 
     public IEnumerator VerifyAnswer()

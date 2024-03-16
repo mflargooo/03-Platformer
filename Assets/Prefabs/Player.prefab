@@ -196,7 +196,7 @@ MonoBehaviour:
   groundCheckPoints:
   - {fileID: 9114243707209968782}
   - {fileID: 5473553597600884052}
-  groundCheckDist: 0.05
+  groundCheckDist: 0.1
   anim: {fileID: 3811015105219132544}
   model: {fileID: 2429507378622360912}
   jumpParticles: {fileID: 2046305242093312972, guid: 1c63a05d7d9c0044f94f031602136a5b,

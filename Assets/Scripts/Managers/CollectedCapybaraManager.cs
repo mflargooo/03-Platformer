@@ -9,12 +9,14 @@ public class CollectedCapybaraManager : MonoBehaviour
 
     [Min(min: 1)]
     private int numCapybaraNotes;
-    private Camera cam;
+    [SerializeField] private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
         numCapybaraNotes = capybaras.Length;
         collectedCapybaras = new bool[numCapybaraNotes];
+        SetupList();
+        DeactivateCapybaraList();
     }
 
     public void SetReferenceCamera(Camera cam)
@@ -31,7 +33,6 @@ public class CollectedCapybaraManager : MonoBehaviour
         for (int i = 0; i < numCapybaraNotes; i++)
         {
             Vector3 homePos = cam.transform.right * (i * (capybaraSize + spacing) - start) + center;
-            capybaras[i].transform.position = homePos;
             capybaras[i].transform.rotation = cam.transform.rotation;
             capybaras[i].SetHomePos(homePos);
             capybaras[i].Setup();
@@ -53,6 +54,16 @@ public class CollectedCapybaraManager : MonoBehaviour
         {
             capybaras[i].gameObject.SetActive(false);
         }
+    }
+
+    public void ActivateCapybara(int i)
+    {
+        collectedCapybaras[i] = true;
+    }
+
+    public bool IsCapybaraActive(int i)
+    {
+        return collectedCapybaras[i];
     }
 
     public Selectable[] GetCapybaraList()
