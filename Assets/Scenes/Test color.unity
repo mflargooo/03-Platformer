@@ -1993,9 +1993,9 @@ AudioSource:
   m_GameObject: {fileID: 453016713}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 819a251ebef374636a577b5eb42ee59d,
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e7ffafd4ed2e54ab08fdd232b112153a,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 71b5470c2f9f24251a60a1ff8e864b9d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ce7c5e7103aff441485b3051cd4d3840, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6360,11 +6360,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 971598592356303947, guid: 9ef787af93625134ea4c8136983aa292,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 4572884934791995363, guid: 9ef787af93625134ea4c8136983aa292,
         type: 3}
       propertyPath: m_LocalPosition.x

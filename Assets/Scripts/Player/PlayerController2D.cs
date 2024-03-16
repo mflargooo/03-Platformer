@@ -126,4 +126,9 @@ public class PlayerController2D : MonoBehaviour
             Gizmos.DrawLine(avgGroundCheck, avgGroundCheck + Vector3.down * groundCheckDist);
         }
     }
+
+    public float GetSpeed()
+    {
+        return moveSpeed;
+    }
 }
