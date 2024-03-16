@@ -20,4 +20,7 @@ public class Selectable : MonoBehaviour
     {
         transform.position = homePos;
     }
+
+    public virtual void OnSelect() { }
+    public virtual void OnDeselect() { }
 }

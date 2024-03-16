@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ClickAndDrag : MonoBehaviour
 {
-    public static Selectable selectedGameObject;
+    public Selectable selectedGameObject;
     Ray mouseRay;
-    private static RaycastHit[] hits;
+    private RaycastHit[] hits;
 
     [SerializeField] private float clickDetectRange;
     [SerializeField] private float selectedObjDepth;
@@ -22,21 +22,25 @@ public class ClickAndDrag : MonoBehaviour
         mouseRay = cam.ScreenPointToRay(Input.mousePosition);
         hits = Physics.RaycastAll(mouseRay, clickDetectRange);
 
-        if(Input.GetMouseButtonDown(0))
-            MouseDown();
-        else if(Input.GetMouseButtonUp(0))
-            MouseUp();
-
+        if (Input.GetMouseButtonDown(0))
+            MouseZeroDown();
+        else if (Input.GetMouseButtonUp(0))
+            MouseZeroUp();
+        else if (Input.GetMouseButtonDown(1))
+            MouseOneDown();
         if(selectedGameObject)
             UpdateSelectedObj();
     }
-    public static void SelectGameObject(Selectable obj)
+
+    public void SelectGameObject(Selectable obj)
     {
         selectedGameObject = obj;
+        obj.OnSelect();
     }
 
-    public static void DeselectGameObject()
+    public void DeselectGameObject()
     {
+        selectedGameObject.OnDeselect();
         selectedGameObject = null;
     }
 
@@ -46,17 +50,49 @@ public class ClickAndDrag : MonoBehaviour
         selectedGameObject.transform.position = mouseRay.direction * scalar + mouseRay.origin;
     }
 
-    private void MouseDown()
+    private void MouseZeroDown()
     {
-        DeselectGameObject();
+        if (selectedGameObject)
+            DeselectGameObject();
+
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].collider.gameObject.tag == "Selectable")
+            if (hits[i].collider.gameObject.tag == "Selectable") {
                 SelectGameObject(hits[i].collider.gameObject.GetComponent<Selectable>());
+            }
         }
     }
 
-    private void MouseUp()
+    private void MouseOneDown()
+    {
+        Selectable otherSelectable = null;
+        if (!selectedGameObject)
+        {
+            for (int i = 0; i < hits.Length; i++)
+            {
+                GameObject hit = hits[i].collider.gameObject;
+                if (hit.tag == "Selectable")
+                {
+                    otherSelectable = hit.GetComponent<Selectable>();
+                    break;
+                }
+            }
+
+            if (otherSelectable)
+            {
+                otherSelectable.ResetPos();
+                otherSelectable.transform.parent = null;
+            }
+        }
+        else
+        {
+            selectedGameObject.ResetPos();
+            selectedGameObject.transform.parent = null;
+            DeselectGameObject();
+        }
+    }
+
+    private void MouseZeroUp()
     {
         if (selectedGameObject)
         {
