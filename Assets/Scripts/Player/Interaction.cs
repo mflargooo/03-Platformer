@@ -23,8 +23,6 @@ public class Interaction : MonoBehaviour
         if (closest)
         {
             interactPrompt.SetActive(true);
-            interactPrompt.transform.position = (Vector3)((Vector2)closest.transform.position) + Vector3.up * closest.GetComponent<Collider2D>().bounds.size.y * 2f - Vector3.forward * 10f;
-
             if (Input.GetKeyDown(interactKey))
             {
                 closest.GetComponent<IInteractable>().Interact();
