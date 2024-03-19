@@ -6,10 +6,11 @@ public class Shoot : MonoBehaviour
 {
     [SerializeField] private float maxLaunchSpeed;
     private int maxProjCount = 0;
-    private int currProjCount;
+    private int currProjCount = 0;
     Vector3 mousePos;
     Vector3 playerPos;
     Vector3 launchVector;
+    Ray mouseRay;
 
     [SerializeField] private Projectile capybaraProjectile;
     private bool canShoot;
@@ -17,11 +18,14 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canShoot && Input.GetMouseButtonDown(0) && currProjCount > maxProjCount)
+        mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float c = (transform.position.z - mouseRay.origin.z) / mouseRay.direction.z;
+        if (canShoot && Input.GetMouseButtonDown(0) && currProjCount > 0)
         {
-            mousePos = (Vector3)(Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            playerPos = (Vector3)(Vector2)transform.position;
-            launchVector = Vector3.ClampMagnitude(mousePos - playerPos, maxLaunchSpeed);
+            Debug.Log("SHOT");
+            mousePos = (Vector2)(mouseRay.direction * c + mouseRay.origin);
+            playerPos = (Vector2)transform.position;
+            launchVector = Vector2.ClampMagnitude(mousePos - playerPos, maxLaunchSpeed);
 
             Projectile proj = Instantiate(capybaraProjectile, playerPos, capybaraProjectile.transform.rotation);
             proj.Launch(launchVector, this);
@@ -33,6 +37,7 @@ public class Shoot : MonoBehaviour
     public void IncrementProjCount()
     {
         maxProjCount++;
+        currProjCount++;
     }
 
     public void UpdateCurrProjCount(int i)
@@ -42,6 +47,7 @@ public class Shoot : MonoBehaviour
 
     public void CanShoot(bool b)
     {
+        Debug.Log("SHOOT STATUS: " + b);
         canShoot = b;
     }
 }
