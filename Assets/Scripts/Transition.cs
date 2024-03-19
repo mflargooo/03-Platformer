@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Transition : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Transition : MonoBehaviour
 
     [SerializeField] private Vector2 triggerSize;
     [SerializeField] private Vector2 triggerOffset;
+
+    [SerializeField] private UnityEvent leftToRight;
+    [SerializeField] private UnityEvent rightToLeft;
 
     private void Start()
     {
@@ -36,6 +40,7 @@ public class Transition : MonoBehaviour
         {
             print("LEFT TO RIGHT TRIGGERED");
             StartCoroutine(TransitionManager.DoTransition(tpPointRight, leftLevelParent, rightLevelParent, 1));
+            leftToRight.Invoke();
         }
 
         /* Right to Left */
@@ -45,6 +50,7 @@ public class Transition : MonoBehaviour
         {
             print("RIGHT TO LEFT TRIGGERED");
             StartCoroutine(TransitionManager.DoTransition(tpPointLeft, rightLevelParent, leftLevelParent, -1));
+            rightToLeft.Invoke();
         }
     }
 

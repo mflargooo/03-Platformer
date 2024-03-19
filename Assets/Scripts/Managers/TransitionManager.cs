@@ -39,7 +39,8 @@ public class TransitionManager : MonoBehaviour
         playerTransform.GetChild(0).GetComponent<Animator>().SetBool("isGrounded", true);
         playerTransform.GetChild(0).GetComponent<Animator>().Play("player_running");
         pc.transform.position = target.position + Vector3.right * lookDir;
-        
+        playerRB.velocity = Vector2.right * pc.GetSpeed() * lookDir;
+
         yield return new WaitForSeconds(.25f);
         bpAnim.Play("FadeIn");
         yield return new WaitForSeconds(.25f);

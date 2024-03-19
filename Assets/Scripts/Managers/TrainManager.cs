@@ -17,26 +17,25 @@ public class TrainManager : MonoBehaviour
     private float timer;
 
     [SerializeField] private TMP_Text timerText;
-    private bool ended;
     private bool cabooseFailed;
 
     /* 0 is left, 1 is right, 2 is left */
     [SerializeField] private Material[] tracks;
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject caboosePrefab;
     [SerializeField] private float cabooseSpeed;
 
+    GameObject pathParent;
     private List<Track> path;
-    private List<GameObject> cabooses = new List<GameObject>();
+    private GameObject[] cabooses = new GameObject[3];
 
-    GridManager gridManager;
+    [SerializeField] GridManager gridManager;
     float tileSpacing;
     float tileSize;
-    // Start is called before the first frame update
-    void Start()
+
+    void Setup()
     {
         timer = completeTime + .999f;
-        gridManager = FindObjectOfType<GridManager>();
+        
         tileSpacing = gridManager.GetTileSpacing();
         tileSize = gridManager.GetTileSize();
 
@@ -96,7 +95,7 @@ public class TrainManager : MonoBehaviour
             }
 
             /* Collect path into children of parent */
-            GameObject pathParent = new GameObject();
+            pathParent = new GameObject();
             pathParent.name = "Path";
             pathParent.transform.parent = transform;
             for (int i = 0; i < path.Count; i++)
@@ -167,27 +166,29 @@ public class TrainManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public IEnumerator RestartPuzzle()
     {
-        if (timer >= 1f)
+        if (gridManager.GetGridRoot()) Destroy(gridManager.GetGridRoot());
+        if (pathParent) Destroy(pathParent);
+        path = new List<Track>();
+
+        Setup();
+
+        while (timer >= 1f)
         {
             timer -= Time.deltaTime;
             timerText.text = ((int)timer).ToString();
+            yield return null;
         }
-        else if (!ended)
+        foreach (Cell c in grid)
         {
-            ended = true;
-            foreach (Cell c in grid)
+            if (c)
             {
-                if (c)
-                {
-                    c.GetComponent<Track>().Lock();
-                }
+                c.GetComponent<Track>().Lock();
             }
-            timerText.text = ((int)timer).ToString();
-            Destroy(player);
-            StartCoroutine(SpawnCaboose());
         }
+        timerText.text = ((int)timer).ToString();
+        StartCoroutine(SpawnCaboose());
     }
 
     private IEnumerator SpawnCaboose()
@@ -195,7 +196,7 @@ public class TrainManager : MonoBehaviour
         for (int i = 0; i < 3 && !cabooseFailed; i++)
         {
             GameObject caboose = Instantiate(caboosePrefab, path[0].transform.position + Vector3.up * .01f - Vector3.forward * 1f, caboosePrefab.transform.rotation);
-            cabooses.Add(caboose);
+            cabooses[i] = caboose;
             caboose.transform.parent = transform;
             caboose.name = "Caboose " + i.ToString();
             StartCoroutine(Caboose(caboose));

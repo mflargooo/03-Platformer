@@ -11,6 +11,6 @@ public class LockedCafeDoor : MonoBehaviour, IInteractable
     {
         CameraViewManager.SetCurrLevel(cafe);
         puzzleToggle.SetActive(true);
-        CameraViewManager.DisplayPuzzle();
+        CameraViewManager.DisplayKaraokePuzzle();
     }
 }

@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 8841651200298988776}
   - component: {fileID: 971598592356303947}
   - component: {fileID: 5435642396574555267}
+  - component: {fileID: 609004210161123514}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -372,6 +373,21 @@ MonoBehaviour:
   interactionRadius: 4
   interactPrompt: {fileID: 5992556378644498368}
   interactKey: 101
+--- !u!114 &609004210161123514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755082650308876408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0291cedbcbaac0945af8ec05e445442c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLaunchSpeed: 10
+  capybaraProjectile: {fileID: 1724191404554039789, guid: dfa8763ab4eb7f84b81d46c54ee8dfbe,
+    type: 3}
 --- !u!1001 &6459291128552513457
 PrefabInstance:
   m_ObjectHideFlags: 0
