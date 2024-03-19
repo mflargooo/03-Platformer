@@ -848,12 +848,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857a84a128000c547b062c33dac427ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointLeft: {fileID: 597478274}
-  waypointRight: {fileID: 1148540031}
+  triggerLeft: {fileID: 597478274}
+  triggerRight: {fileID: 1148540031}
+  tpPointLeft: {fileID: 0}
+  tpPointRight: {fileID: 0}
   leftLevelParent: {fileID: 707220258}
   rightLevelParent: {fileID: 1936316912}
-  waypointSize: {x: 2, y: 9}
-  waypointOffset: {x: 0, y: 2}
+  triggerSize: {x: 2, y: 9}
+  triggerOffset: {x: 0, y: 2}
 --- !u!4 &727604616
 Transform:
   m_ObjectHideFlags: 0
@@ -1036,7 +1038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795612509}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1745,12 +1747,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857a84a128000c547b062c33dac427ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointLeft: {fileID: 1656873659}
-  waypointRight: {fileID: 2189686}
+  triggerLeft: {fileID: 1656873659}
+  triggerRight: {fileID: 2189686}
+  tpPointLeft: {fileID: 0}
+  tpPointRight: {fileID: 0}
   leftLevelParent: {fileID: 1936316912}
   rightLevelParent: {fileID: 2078724472}
-  waypointSize: {x: 2, y: 9}
-  waypointOffset: {x: 0, y: 2}
+  triggerSize: {x: 2, y: 9}
+  triggerOffset: {x: 0, y: 2}
 --- !u!4 &1653053730
 Transform:
   m_ObjectHideFlags: 0
