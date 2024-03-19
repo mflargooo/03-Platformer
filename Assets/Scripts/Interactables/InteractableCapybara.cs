@@ -7,7 +7,7 @@ public class InteractableCapybara : MonoBehaviour, IInteractable
     public void Interact()
     {
         CollectedCapybaraManager ccm = FindObjectOfType<CollectedCapybaraManager>();
-        Destroy(gameObject);
         ccm.ActivateCapybara(int.Parse(name.Substring(name.Length - 1)));
+        Destroy(gameObject);
     }
 }

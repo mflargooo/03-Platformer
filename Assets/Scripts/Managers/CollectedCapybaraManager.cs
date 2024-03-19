@@ -5,7 +5,6 @@ using UnityEngine;
 public class CollectedCapybaraManager : MonoBehaviour
 {
     [SerializeField] private SingingCapybara[] capybaras;
-    private bool[] collectedCapybaras;
 
     [Min(min: 1)]
     private int numCapybaraNotes;
@@ -14,7 +13,6 @@ public class CollectedCapybaraManager : MonoBehaviour
     void Start()
     {
         numCapybaraNotes = capybaras.Length;
-        collectedCapybaras = new bool[numCapybaraNotes];
         SetupList();
         DeactivateCapybaraList();
     }
@@ -40,14 +38,6 @@ public class CollectedCapybaraManager : MonoBehaviour
         }
     }
 
-    public void ActivateCapybaraList()
-    {
-        for (int i = 0; i < numCapybaraNotes; i++)
-        {
-            if (collectedCapybaras[i]) capybaras[i].gameObject.SetActive(true);
-        }
-    }
-
     public void DeactivateCapybaraList()
     {
         for (int i = 0; i < numCapybaraNotes; i++)
@@ -58,12 +48,7 @@ public class CollectedCapybaraManager : MonoBehaviour
 
     public void ActivateCapybara(int i)
     {
-        collectedCapybaras[i] = true;
-    }
-
-    public bool IsCapybaraActive(int i)
-    {
-        return collectedCapybaras[i];
+        capybaras[i].gameObject.SetActive(true);
     }
 
     public Selectable[] GetCapybaraList()

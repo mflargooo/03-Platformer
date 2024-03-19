@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LightRampTexture:
-        m_Texture: {fileID: 2800000, guid: f8ca21af549a65a40b848f2330b50790, type: 3}
+        m_Texture: {fileID: 2800000, guid: bfe6d9beb762ae547ad2d1b79a29ca0f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LocalShiftTexture:
@@ -261,7 +261,7 @@ Material:
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.5394797, g: 0.19461787, b: 0.07618539, a: 1}
     - _PrimaryColor: {r: 1, g: 1, b: 1, a: 0}
-    - _RimColor: {r: 0.056128494, g: 0.017641952, b: 0.0047769533, a: 0}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimShadowColor: {r: 0.2830189, g: 0.030704886, b: 0.07071439, a: 0}
     - _SecondaryColor: {r: 1, g: 1, b: 1, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
