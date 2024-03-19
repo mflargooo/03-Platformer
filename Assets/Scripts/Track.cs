@@ -40,4 +40,20 @@ public class Track : Cell
     {
         locked = true;
     }
+
+    private void OnMouseDown()
+    {
+        Rotate();
+    }
+
+    private void OnMouseEnter()
+    {
+        if (locked) return;
+        CursorState.Hovered();
+    }
+
+    private void OnMouseExit()
+    {
+        CursorState.Default();
+    }
 }

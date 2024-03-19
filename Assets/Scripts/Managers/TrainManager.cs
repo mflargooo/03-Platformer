@@ -39,7 +39,6 @@ public class TrainManager : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
         tileSpacing = gridManager.GetTileSpacing();
         tileSize = gridManager.GetTileSize();
-        Cell[,] grid = null;
 
         if (randomlyGenerate)
         {
@@ -178,6 +177,13 @@ public class TrainManager : MonoBehaviour
         else if (!ended)
         {
             ended = true;
+            foreach (Cell c in grid)
+            {
+                if (c)
+                {
+                    c.GetComponent<Track>().Lock();
+                }
+            }
             timerText.text = ((int)timer).ToString();
             Destroy(player);
             StartCoroutine(SpawnCaboose());
