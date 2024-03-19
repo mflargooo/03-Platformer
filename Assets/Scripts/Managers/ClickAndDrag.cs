@@ -10,7 +10,7 @@ public class ClickAndDrag : MonoBehaviour
 
     [SerializeField] private Transform defaultParent;
     [SerializeField] private float clickDetectRange;
-    [SerializeField] private float selectedObjDepth;
+    [SerializeField] private float selectedObjPlane;
     [SerializeField] private Camera cam;
 
     public void SetCamera(Camera cam)
@@ -47,7 +47,7 @@ public class ClickAndDrag : MonoBehaviour
 
     private void UpdateSelectedObj()
     {
-        float scalar = (selectedObjDepth - mouseRay.origin.z) / mouseRay.direction.z;
+        float scalar = (selectedObjPlane - mouseRay.origin.z) / mouseRay.direction.z;
         selectedGameObject.transform.position = mouseRay.direction * scalar + mouseRay.origin;
     }
 

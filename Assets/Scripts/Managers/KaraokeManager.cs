@@ -26,6 +26,10 @@ public class KaraokeManager : MonoBehaviour
     [SerializeField] private AudioClip mediumCorrect;
     [SerializeField] private AudioClip hardCorrect;
 
+    [SerializeField] private AudioClip easyHint;
+    [SerializeField] private AudioClip mediumHint;
+    [SerializeField] private AudioClip hardHint;
+
     private GameObject slotsParent;
     private GameObject[] slots;
 
@@ -36,12 +40,33 @@ public class KaraokeManager : MonoBehaviour
     public static AudioClip[] notes;
     private AudioClip correct;
 
-    [SerializeField] private Button verifyButton;
+    [SerializeField] private GameObject puzzleUI;
+    [SerializeField] private GameObject puzzleToggle;
+    [SerializeField] private LockedCafeDoor lockedDoor;
+
+    [SerializeField] private Button hintButton;
+
 
     private void Start()
     {
         EasyPuzzle();
-        ccm.ActivateCapybaraList();
+        puzzleToggle.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (puzzleToggle.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseDragMenu();
+        }
+        if (puzzleToggle.activeInHierarchy && Input.GetKeyDown(KeyCode.R))
+        {
+            PlayHint();
+        }
+        if (puzzleToggle.activeInHierarchy && Input.GetKeyDown(KeyCode.V))
+        {
+            Verify();
+        }
     }
 
     public void EasyPuzzle()
@@ -49,6 +74,7 @@ public class KaraokeManager : MonoBehaviour
         solution = easySolution;
         notes = easyNotes;
         correct = easyCorrect;
+        karaokeAS.clip = easyHint;
         SetupSlots(easySolution.Length, 1f, slotSize);
     }
     public void MediumPuzzle()
@@ -56,6 +82,7 @@ public class KaraokeManager : MonoBehaviour
         solution = mediumSolution;
         notes = mediumNotes;
         correct = mediumCorrect;
+        karaokeAS.clip = mediumHint;
         SetupSlots(mediumSolution.Length, .67f, slotSize);
     }
     public void HardPuzzle()
@@ -63,6 +90,7 @@ public class KaraokeManager : MonoBehaviour
         solution = hardSolution;
         notes = hardNotes;
         correct = hardCorrect;
+        karaokeAS.clip = hardHint;
         SetupSlots(hardSolution.Length, .33f, slotSize);
     }
     private void SetupSlots(int numNotesInSoln, float slotSpacing, float slotSize)
@@ -90,6 +118,7 @@ public class KaraokeManager : MonoBehaviour
 
     public IEnumerator VerifyAnswer()
     {
+        cad.enabled = false;
         bool status = true;
         for (int i = 0; i < solution.Length; i++)
         {
@@ -104,14 +133,15 @@ public class KaraokeManager : MonoBehaviour
                 break;
             }
 
-            if (solution[i] == int.Parse(entry.name.Substring(entry.name.Length - 1)))
-                karaokeAS.PlayOneShot(notes[i]);
-            else
+            karaokeAS.PlayOneShot(notes[solution[i]]);
+            yield return new WaitForSeconds(notes[solution[i]].length);
+
+            if (solution[i] != int.Parse(entry.name.Substring(entry.name.Length - 1)))
             {
                 status = false;
                 break;
             }
-            yield return new WaitForSeconds(notes[i].length);
+            
         }
 
         if(status)
@@ -123,17 +153,56 @@ public class KaraokeManager : MonoBehaviour
                 capys[i].tag = "Untagged";
                 Destroy(capys[i].GetComponent<SingingCapybara>());
             }
+            yield return new WaitForSeconds(correct.length + .2f);
+            CompletedPuzzle();
         }
         else
         {
             karaokeAS.PlayOneShot(falseSolnClip);
-            verifyButton.interactable = true;
+            puzzleUI.SetActive(true);
+            cad.enabled = true;
         }
+    }
+
+    void CompletedPuzzle()
+    {
+        GameObject door = lockedDoor.gameObject;
+        door.layer = 0;
+        CloseDragMenu();
+        Destroy(lockedDoor);
+        Destroy(door); /* Play door anim instead */
     }
 
     public void Verify()
     {
-        verifyButton.interactable = false;
+        StopAllCoroutines();
+        hintButton.interactable = true;
+        karaokeAS.Stop();
+        karaokeAS.time = 0f;
+        puzzleUI.SetActive(false);
         StartCoroutine(VerifyAnswer());
+    }
+
+    public void CloseDragMenu()
+    {
+        StopAllCoroutines();
+        hintButton.interactable = true;
+        karaokeAS.Stop();
+        karaokeAS.time = 0f;
+        puzzleToggle.SetActive(false);
+        CameraViewManager.DisplayMain();
+    }
+
+    IEnumerator Hint()
+    {
+        hintButton.interactable = false;
+        karaokeAS.Play();
+        yield return new WaitForSeconds(karaokeAS.clip.length + .1f);
+        hintButton.interactable = true;
+    }
+
+    public void PlayHint()
+    {
+        StartCoroutine(Hint());
     }
 }

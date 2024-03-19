@@ -22,10 +22,14 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float maxFallSpeed;
 
     public bool isGrounded { get; private set; }
+    public bool hitHead { get; private set; }
     [Header("Grounded")]
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform[] groundCheckPoints;
     [SerializeField] private float groundCheckDist;
+
+    [Header("Hit Head")]
+    [SerializeField] private Transform[] headCheckPoints;
 
     [Header("Animation and Model")]
     [SerializeField] private Animator anim;
@@ -37,10 +41,22 @@ public class PlayerController2D : MonoBehaviour
 
     private GameObject landPartsInstance;
     private Vector3 avgGroundCheck;
+
+    RaycastHit2D groundBack;
+    RaycastHit2D groundFront;
+    RaycastHit2D groundMiddle;
+    RaycastHit2D headBack;
+    RaycastHit2D headFront;
+    RaycastHit2D headMiddle;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        groundCheckPoints[0].localPosition = col.offset - col.size / 2;
+        groundCheckPoints[1].localPosition = col.offset + new Vector2(col.size.x / 2, -col.size.y / 2);
+        headCheckPoints[0].localPosition = col.offset + new Vector2(-col.size.x / 2, col.size.y / 2);
+        headCheckPoints[1].localPosition = col.offset + col.size / 2;
     }
 
     // Update is called once per frame
@@ -59,14 +75,14 @@ public class PlayerController2D : MonoBehaviour
 
     void Movement()
     {
-        RaycastHit2D hitBack = Physics2D.Raycast(groundCheckPoints[0].position, Vector2.down, groundCheckDist,  whatIsGround);
-        RaycastHit2D hitFront = Physics2D.Raycast(groundCheckPoints[1].position, Vector2.down, groundCheckDist, whatIsGround);
-        RaycastHit2D hitMiddle = Physics2D.Raycast((groundCheckPoints[0].position + groundCheckPoints[1].position) / 2, Vector2.down, groundCheckDist, whatIsGround);
-        isGrounded = (hitBack.collider != null || hitFront.collider != null  || hitMiddle.collider != null && hitMiddle.collider.tag == "Ground") && rb.velocity.magnitude <= .1f;
+        groundBack = Physics2D.Raycast(groundCheckPoints[0].position, Vector2.down, groundCheckDist,  whatIsGround);
+        groundFront = Physics2D.Raycast(groundCheckPoints[1].position, Vector2.down, groundCheckDist, whatIsGround);
+        groundMiddle = Physics2D.Raycast((groundCheckPoints[0].position + groundCheckPoints[1].position) / 2, Vector2.down, groundCheckDist, whatIsGround);
+        isGrounded = (groundBack.collider || groundFront.collider || groundMiddle.collider) && rb.velocity.y <= .1f;
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)
         {
-            Destroy(Instantiate(jumpParticles, avgGroundCheck - Vector3.forward * 3f, jumpParticles.transform.rotation), 3f);
+            Destroy(Instantiate(jumpParticles, avgGroundCheck, jumpParticles.transform.rotation), 1.25f);
             Destroy(landPartsInstance);
             model.transform.eulerAngles = Vector3.zero;
             velocity.y = jumpSpeed;
@@ -94,7 +110,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (isGrounded && velocity.y <= 0f)
         {
-            if (!landPartsInstance) landPartsInstance = Instantiate(landParticles, avgGroundCheck - Vector3.forward * 3f, jumpParticles.transform.rotation);
+            if (!landPartsInstance) landPartsInstance = Instantiate(landParticles, avgGroundCheck, jumpParticles.transform.rotation);
             reachedJumpPeak = false;
             velocity.y = 0;
         }
@@ -102,6 +118,12 @@ public class PlayerController2D : MonoBehaviour
         {
             velocity.y += Physics.gravity.y * baseGravityMultiplier * Time.deltaTime;
         }
+
+        headBack = Physics2D.Raycast(headCheckPoints[0].position, Vector2.up, groundCheckDist, whatIsGround);
+        headFront = Physics2D.Raycast(headCheckPoints[1].position, Vector2.up, groundCheckDist, whatIsGround);
+        headMiddle = Physics2D.Raycast((headCheckPoints[0].position + headCheckPoints[1].position) / 2, Vector2.up, groundCheckDist, whatIsGround);
+        hitHead = (headBack.collider || headFront.collider || headMiddle.collider) && velocity.y > 0f;
+        if (hitHead) velocity.y = 0f;
 
         velocity.y = Mathf.Clamp(velocity.y, -maxFallSpeed, jumpSpeed);
 
