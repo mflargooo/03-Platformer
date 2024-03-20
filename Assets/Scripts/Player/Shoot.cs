@@ -5,8 +5,8 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private float maxLaunchSpeed;
-    private int maxProjCount = 0;
-    private int currProjCount = 0;
+    private int maxProjCount = 1;
+    private int currProjCount = 1;
     Vector3 mousePos;
     Vector3 playerPos;
     Vector3 launchVector;
@@ -25,10 +25,10 @@ public class Shoot : MonoBehaviour
             Debug.Log("SHOT");
             mousePos = (Vector2)(mouseRay.direction * c + mouseRay.origin);
             playerPos = (Vector2)transform.position;
-            launchVector = Vector2.ClampMagnitude(mousePos - playerPos, maxLaunchSpeed);
+            launchVector = Vector2.ClampMagnitude(mousePos - playerPos, 2f);
 
             Projectile proj = Instantiate(capybaraProjectile, playerPos, capybaraProjectile.transform.rotation);
-            proj.Launch(launchVector, this);
+            proj.Launch(launchVector * maxLaunchSpeed / 2f, this);
 
             currProjCount--;
         }
@@ -36,8 +36,8 @@ public class Shoot : MonoBehaviour
 
     public void IncrementProjCount()
     {
-        maxProjCount++;
-        currProjCount++;
+        //maxProjCount++;
+        //currProjCount++;
     }
 
     public void UpdateCurrProjCount(int i)
