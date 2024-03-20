@@ -2,7 +2,7 @@
 
 README
 
-        TO BE NAME - developed by Hidden Reflection Studios, a 2D sidescrolling platformer with 3D assets, featuring a capybara protagonist on an adventure back to Mt. Fuji.
+        Tomo - developed by Hidden Reflection Studios, a 2D sidescrolling platformer with 3D assets, featuring a capybara protagonist on an adventure back to Mt. Fuji.
 
 RUN DIRECTIONS
 
@@ -25,6 +25,14 @@ RELEASE NOTES
                 - Converted from 3D player to 2D player, and began working towards conversion from 3D to 2D for other characters
                 - Imported audio files to be used
                 - Updated Cafe level
+
+        () Interim Build - Version 3
+
+                - Reworked Karaoke Puzzle and Cafe Scene
+                - Added transitions between scenes
+                - Linked Cafe to Tokyo, and Tokyo to Subway station
+                - Added shooting of capybara
+                - Fixed player movement and collision detection
 
 ATTRIBUTIONS 
 
@@ -50,6 +58,7 @@ ATTRIBUTIONS
                         * https://freesound.org/people/Under7dude/sounds/163447/
                         * https://freesound.org/people/Robinhood76/sounds/66539/
                         * https://freesound.org/people/Rob_Marion/sounds/542002/
+                - Large Angry Cats by suspensiondigital: https://freesound.org/people/suspensiondigital/sounds/389708/
 
                 All audio mixed in Logic Pro. 
                 VST Instruments: Logic library, Roland Zenology Lite
