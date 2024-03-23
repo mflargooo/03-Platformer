@@ -5,8 +5,8 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private float maxLaunchSpeed;
-    private int maxProjCount = 1;
-    private int currProjCount = 1;
+    [SerializeField] private int maxProjCount = 1;
+    private int currProjCount;
     Vector3 mousePos;
     Vector3 playerPos;
     Vector3 launchVector;
@@ -15,6 +15,10 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Projectile capybaraProjectile;
     private bool canShoot;
 
+    private void Start()
+    {
+        currProjCount = maxProjCount;
+    }
     // Update is called once per frame
     void Update()
     {

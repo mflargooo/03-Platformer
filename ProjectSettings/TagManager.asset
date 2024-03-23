@@ -10,6 +10,7 @@ TagManager:
   - Interacting
   - Slot
   - Selectable
+  - Hit
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Selectable
   - Interactable
   - IgnorePlayer
-  - 
+  - Player
   - 
   - 
   - 
