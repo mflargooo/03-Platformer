@@ -127,10 +127,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AdaptiveThicnkess: 0
-    - _AdditionalLightsAmount: 0.695
-    - _AdditionalLightsFaloff: 1
-    - _AdditionalLightsIntesity: 3.18
-    - _AdditionalLightsSmoothnessMultiplier: 1.62
+    - _AdditionalLightsAmount: 0
+    - _AdditionalLightsFaloff: 0
+    - _AdditionalLightsIntesity: 4.85
+    - _AdditionalLightsSmoothnessMultiplier: 1.65
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _BacklightAmount: 0.5
@@ -167,7 +167,7 @@ Material:
     - _Lighten: 0
     - _LocalShift: -2
     - _LocalShiftStrength: 1
-    - _MainLightIntesity: 1
+    - _MainLightIntesity: 3.99
     - _MaxScaleDependingOnCamera: 1
     - _Metallic: 0
     - _NormalMapStrength: 0
@@ -202,15 +202,15 @@ Material:
     - _SideShineHardness: 0
     - _SideShineIntensity: 1
     - _Smoothness: 0.5
-    - _SmoothnessMultiplier: 1.25
+    - _SmoothnessMultiplier: 2
     - _SmoothnessTextureChannel: 0
-    - _SpecularFaloff: 0
+    - _SpecularFaloff: 0.272
     - _SpecularHighlights: 1
     - _SpecularMaskRotation: 0
     - _SpecularMaskScale: 1
     - _SpecularMaskStrength: 0
-    - _SpecularPosterizeSteps: 0
-    - _SpecularShadowMask: 1
+    - _SpecularPosterizeSteps: 15
+    - _SpecularShadowMask: 0.85
     - _SrcBlend: 1
     - _StepHalftoneTexture: 0
     - _StepOffset: 0
