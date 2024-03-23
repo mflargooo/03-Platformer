@@ -1,60 +1,60 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class BirdBehavior : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public Transform ticketTransform; // 当前车票的Transform
-    private Transform[] possibleNewPositions; // 可能的新位置
-    private bool isCarryingTicket = false;
+    public GameObject ticket;
+    private Transform ticketTransform;
+    private Vector3 originalPosition; // 记录鸟的初始位置
 
-    // 设置可能的新位置
-    public void SetPossibleNewPositions(Transform[] newPositions)
+    private float speed = 5f;
+
+    void Start()
     {
-        possibleNewPositions = newPositions;
+        ticketTransform = ticket.transform;
+        originalPosition = transform.position; // 在Start时保存鸟的初始位置
     }
 
-    private void Update()
+    public void PickUpTicket(Vector3 ticketPosition, Vector3 newTicketPosition)
     {
-        // 如果飞鸟拾取了车票并且有一个目标位置
-        if (isCarryingTicket && ticketTransform != null && possibleNewPositions != null)
+        StartCoroutine(FlyToTicket(ticketPosition, newTicketPosition));
+    }
+
+    IEnumerator FlyToTicket(Vector3 ticketPosition, Vector3 newTicketPosition)
+    {
+        yield return MoveToPosition(ticketPosition); // 飞向票据的位置
+
+        ticketTransform.SetParent(transform); // 捡起票据
+
+        // 禁用FloatingObject脚本
+        FloatingObject floatingScript = ticket.GetComponent<FloatingObject>();
+        bool wasFloating = floatingScript != null && floatingScript.enabled;
+        if (wasFloating)
         {
-            // 选择一个新位置并将车票移动过去
-            int index = Random.Range(0, possibleNewPositions.Length);
-            Transform newTargetPosition = possibleNewPositions[index];
-
-            // 飞向新位置
-            ticketTransform.position = Vector3.MoveTowards(ticketTransform.position, newTargetPosition.position, moveSpeed * Time.deltaTime);
-
-            // 检查是否到达新位置
-            if (Vector3.Distance(ticketTransform.position, newTargetPosition.position) < 0.1f)
-            {
-                // 到达新位置，放下车票
-                isCarryingTicket = false;
-                ticketTransform = null; // 飞鸟不再关联车票
-            }
+            floatingScript.enabled = false;
         }
-    }
 
-    private IEnumerator StartTicketTimer()
-    {
-        yield return new WaitForSeconds(5f); // 等待5秒
-        if (ticketTransform != null)
+        yield return MoveToPosition(newTicketPosition); // 飞向新位置
+
+        ticketTransform.SetParent(null); // 放下票据
+
+        // 如果票据具有FloatingObject脚本，则重新启用并更新其开始位置
+        if (wasFloating)
         {
-            // 飞鸟开始携带车票
-            isCarryingTicket = true;
+            floatingScript.enabled = true;
+            floatingScript.UpdateStartPosition(ticketTransform.position);
         }
+
+        // 让鸟回到初始位置
+        yield return MoveToPosition(originalPosition);
     }
 
-    public void BeginCountdown()
+    IEnumerator MoveToPosition(Vector3 targetPosition)
     {
-        StartCoroutine(StartTicketTimer());
-    }
-
-    public void TakeTicket(Transform ticket)
-    {
-        // 将飞鸟的位置移动到车票位置，并设置飞鸟的ticketTransform
-        ticketTransform = ticket;
-        BeginCountdown(); // 开始计时器
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 }

@@ -8,24 +8,25 @@ public class TicketSpawner : MonoBehaviour
     public GameObject ticket;
     public BirdBehavior birdBehavior;
 
-    void Start()
+    private float timer = 0f;
+    private float spawnDelay = 10f; 
+
+    void Update()
     {
-        SpawnTicket();
+        timer += Time.deltaTime;
+
+        if (timer >= spawnDelay)
+        {
+            MoveTicketToRandomSpawnPoint();
+            timer = 0f; 
+        }
     }
 
-
-    public void SpawnTicket()
+    void MoveTicketToRandomSpawnPoint()
     {
-        if (ticketSpawns.Length == 0)
-            return;
+        int randomIndex = Random.Range(0, ticketSpawns.Length);
+        Vector3 newPosition = ticketSpawns[randomIndex].position;
 
-        int index = Random.Range(0, ticketSpawns.Length);
-        GameObject spawnedTicket = Instantiate(ticket, ticketSpawns[index].position, Quaternion.identity);
-
-        if (birdBehavior != null)
-        {
-            birdBehavior.ticketTransform = spawnedTicket.transform;
-            birdBehavior.BeginCountdown();
-        }
+        birdBehavior?.PickUpTicket(ticket.transform.position, newPosition);
     }
 }

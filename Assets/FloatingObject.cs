@@ -20,4 +20,8 @@ public class FloatingObject : MonoBehaviour
         tempVal = Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
         transform.position = startPos + new Vector3(0, tempVal, 0);
     }
+    public void UpdateStartPosition(Vector3 newStartPos)
+    {
+        startPos = newStartPos;
+    }
 }
