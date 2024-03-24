@@ -77,7 +77,7 @@ public class PlayerController2D : MonoBehaviour
     {
         groundBack = Physics2D.Raycast(groundCheckPoints[0].position, Vector2.down, groundCheckDist,  whatIsGround);
         groundFront = Physics2D.Raycast(groundCheckPoints[1].position, Vector2.down, groundCheckDist, whatIsGround);
-        groundMiddle = Physics2D.Raycast((groundCheckPoints[0].position + groundCheckPoints[1].position) / 2, Vector2.down, groundCheckDist, whatIsGround);
+        groundMiddle = Physics2D.Raycast((groundCheckPoints[0].position + groundCheckPoints[1].position) / 2, Vector2.down, groundCheckDist, whatIsGround); 
         isGrounded = (groundBack.collider || groundFront.collider || groundMiddle.collider) && rb.velocity.y <= .1f;
 
         if (Input.GetKeyDown(KeyCode.Space) && coyTime > 0f)

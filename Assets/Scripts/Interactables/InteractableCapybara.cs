@@ -10,6 +10,7 @@ public class InteractableCapybara : MonoBehaviour, IInteractable
         Shoot sh = FindObjectOfType<Shoot>();
         ccm.ActivateCapybara(int.Parse(name.Substring(name.Length - 1)));
         sh.IncrementProjCount();
+        sh.GetComponent<CapybaraCluster>().AddCapybara(int.Parse(name.Substring(name.Length - 1)));
         Destroy(gameObject);
     }
 }

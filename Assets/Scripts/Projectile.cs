@@ -14,6 +14,21 @@ public class Projectile : MonoBehaviour
         this.sh = sh;
     }
 
+    public void Track(Transform player)
+    {
+        StartCoroutine(TrackPlayer(player));
+    }
+
+    IEnumerator TrackPlayer(Transform player)
+    {
+        while(true)
+        {
+            if ((player.transform.position - transform.position).magnitude > 12f)
+                Hit();
+            yield return null;
+        }
+    }
+
     private void Update()
     {
         transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
@@ -23,8 +38,13 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.tag == "Enemy")
         {
-            sh.UpdateCurrProjCount(1);
-            Destroy(gameObject);
+            Hit();
         }
+    }
+
+    void Hit()
+    {
+        sh.UpdateCurrProjCount(int.Parse(name), transform);
+        Destroy(gameObject);
     }
 }
