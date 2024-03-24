@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 2042157025536678213}
   - component: {fileID: 8292610024733612953}
   m_Layer: 9
-  m_Name: Oni
+  m_Name: BossOni
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,8 +358,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.75}
-  m_Size: {x: 1.25, y: 2.75}
+  m_Offset: {x: 0, y: -1.1}
+  m_Size: {x: 1.25, y: 2}
   m_Direction: 0
 --- !u!114 &8292610024733612953
 MonoBehaviour:
@@ -375,10 +375,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   attackRange: 3
-  chaseRange: 12
+  chaseRange: 30
   chaseSpeed: 4
   anim: {fileID: 5849343751118654521}
-  loseChaseTime: 1
+  loseChaseTime: 100
+  isBossMinion: 1
 --- !u!1 &4210512244582045653
 GameObject:
   m_ObjectHideFlags: 0

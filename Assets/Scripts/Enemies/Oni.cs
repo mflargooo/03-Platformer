@@ -14,7 +14,7 @@ public class Oni : MonoBehaviour
     private int health;
 
     private bool isChasing;
-    private bool isAttacking;
+    [SerializeField] private bool isBossMinion;
 
     private Rigidbody2D rb;
     private PlayerController2D player;
@@ -38,6 +38,7 @@ public class Oni : MonoBehaviour
 
     IEnumerator Idle()
     {
+        isChasing = false;
         rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
         anim.SetBool("isChasing", false);
         while(!isChasing)
@@ -54,18 +55,21 @@ public class Oni : MonoBehaviour
             }
 
             Vector3 diff = player.transform.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, diff, diff.magnitude, (1 << LayerMask.NameToLayer("Player")) & (1 << LayerMask.NameToLayer("Ground")));
-            if (hit) print(hit.collider.name);
-            if (hit && hit.collider.gameObject == player.gameObject && diff.magnitude <= chaseRange && diff.x * transform.localScale.x > 0)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, diff, diff.magnitude, ~(1 << LayerMask.NameToLayer("IgnorePlayer")));
+
+            if (isBossMinion)
             {
-                isChasing = true;
+                transform.localScale = new Vector3(diff.x > 0 ? 1 : -1, transform.localScale.y, transform.localScale.z);
             }
 
-            if (isChasing)
+            if (isBossMinion || (hit && hit.collider.gameObject == player.gameObject && diff.magnitude <= chaseRange && diff.x * transform.localScale.x > 0))
             {
+                StopAllCoroutines();
+                isChasing = true;
                 StartCoroutine(Chase());
                 break;
             }
+
             yield return null;
         }
     }
@@ -86,12 +90,30 @@ public class Oni : MonoBehaviour
 
             Vector3 diff = player.transform.position - transform.position;
             Vector3 dir = (diff.x > 0 ? 1 : -1) * Vector3.right;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, diff, diff.magnitude, (1 << LayerMask.NameToLayer("Player")) & (1 << LayerMask.NameToLayer("Ground")));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, diff, diff.magnitude, ~(1 << LayerMask.NameToLayer("IgnorePlayer")));
 
             transform.localScale = new Vector3(dir.x, transform.localScale.y, transform.localScale.z);
             rb.velocity = dir * chaseSpeed + Vector3.up * rb.velocity.y;
 
-            if (diff.magnitude <= attackRange && !isAttacking)
+            if (lct < loseChaseTime && (!hit || hit.collider.tag != "Player"))
+            {
+                lct += Time.deltaTime;
+                yield return null;
+                continue;
+            }
+            else if (lct >= loseChaseTime)
+            {
+                StopAllCoroutines();
+                isChasing = false;
+                StartCoroutine(Idle());
+                break;
+            }
+            else
+            {
+                lct = 0f;
+            }
+
+            if (diff.magnitude <= attackRange)
             {
                 anim.SetBool("isAttacking", true);
                 rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
@@ -99,39 +121,15 @@ public class Oni : MonoBehaviour
                 anim.SetBool("isAttacking", false);
             }
 
-            if (player && hit.collider.gameObject != player.gameObject && !isAttacking)
-                lct += Time.deltaTime;
-            else 
-                lct = 0f;
-
-            if(lct >= loseChaseTime)
-            {
-                isChasing = false;
-                StartCoroutine(Idle());
-                break;
-            }
             yield return null;
         }
     }
 
-    public void SetChaseRange(float range)
-    {
-        chaseRange = range;
-        StopAllCoroutines();
-        StartCoroutine(Chase());
-        isChasing = true;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Projectile")
+        if (other.gameObject.tag == "Projectile")
         {
-            health--;
-        }
-
-        if(health <= 0f)
-        {
-            Destroy(gameObject);
+            TakeDamage();
         }
     }
 

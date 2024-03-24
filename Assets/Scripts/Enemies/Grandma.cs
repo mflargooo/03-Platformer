@@ -34,14 +34,30 @@ public class Grandma : MonoBehaviour
     IEnumerator SpawnOni()
     {
         yield return new WaitForSeconds(timeUntilBossStart);
-        int num = Random.Range(minOniSpawn, maxOniSpawn + 1);
-        for (int i = 0; i < num; i++)
+        while (true)
         {
-            Transform spawnpoint = oniSpawnpoints[Random.Range(0, oniSpawnpoints.Length)];
-            Oni oni = Instantiate(oniPrefab, spawnpoint.position, oniPrefab.transform.rotation);
-            oni.SetChaseRange(20);
-            spawnedOni.Add(oni);
+            yield return null;
+            if (spawnedOni.Count > 0)
+            {
+                for (int i = 0; i < spawnedOni.Count; i++)
+                {
+                    if (!spawnedOni[i]) spawnedOni.RemoveAt(i);
+                    i--;
+                    yield return null;
+                }
+                yield return null;
+                continue;
+            }
             yield return new WaitForSeconds(.5f);
+
+            int num = Random.Range(minOniSpawn, maxOniSpawn + 1);
+            for (int i = 0; i < num; i++)
+            {
+                Transform spawnpoint = oniSpawnpoints[Random.Range(0, oniSpawnpoints.Length)];
+                Oni oni = Instantiate(oniPrefab, spawnpoint.position, oniPrefab.transform.rotation);
+                spawnedOni.Add(oni);
+                yield return new WaitForSeconds(1f);
+            }
         }
 
     }
@@ -62,7 +78,8 @@ public class Grandma : MonoBehaviour
         {
             for(int i = 0; i < spawnedOni.Count; i++)
             {
-                Destroy(spawnedOni[i].gameObject);
+                if(spawnedOni[i])
+                    Destroy(spawnedOni[i].gameObject);
             }
             Destroy(gameObject);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

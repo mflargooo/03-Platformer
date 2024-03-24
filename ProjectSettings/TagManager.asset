@@ -11,6 +11,8 @@ TagManager:
   - Slot
   - Selectable
   - Hit
+  - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX
