@@ -8215,7 +8215,7 @@ Transform:
   m_GameObject: {fileID: 775874837}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -187.32, y: 5.62, z: -15}
+  m_LocalPosition: {x: -187.8, y: 4.9, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9526,6 +9526,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5bc9b5cda8c19e44999f00b9cb5e13d0, type: 2}
   - {fileID: 2100000, guid: eadfef4e85e239b429bf14568c9b0db5, type: 2}
   - {fileID: 2100000, guid: f65778a26d66f8e4ea40ae358fac3b83, type: 2}
+  correctTracks:
+  - {fileID: 2100000, guid: 8bcf4cd37e3e0be409956d2b7f63481b, type: 2}
+  - {fileID: 2100000, guid: 3338877468309a14e91c924b0cc93761, type: 2}
+  - {fileID: 2100000, guid: 008beb6be26816043aebfbc903c37174, type: 2}
   caboosePrefab: {fileID: 5281402578870869116, guid: 47f08c5097cb57b4bacc15132b8ea025,
     type: 3}
   cabooseSpeed: 3
@@ -15776,7 +15780,7 @@ PrefabInstance:
     - target: {fileID: 8143392024899825450, guid: 9ef787af93625134ea4c8136983aa292,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.7
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 8143392024899825450, guid: 9ef787af93625134ea4c8136983aa292,
         type: 3}
@@ -18408,7 +18412,7 @@ Transform:
   m_GameObject: {fileID: 1918491035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.7, y: 4.9, z: -15}
+  m_LocalPosition: {x: -13, y: 4.9, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19500,7 +19504,7 @@ Transform:
   m_GameObject: {fileID: 2023267474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.7, y: 4.9, z: -15}
+  m_LocalPosition: {x: -13, y: 4.9, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

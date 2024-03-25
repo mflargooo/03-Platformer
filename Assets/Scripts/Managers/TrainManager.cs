@@ -21,6 +21,7 @@ public class TrainManager : MonoBehaviour
 
     /* 0 is left, 1 is right, 2 is left */
     [SerializeField] private Material[] tracks;
+    [SerializeField] private Material[] correctTracks;
     [SerializeField] private GameObject caboosePrefab;
     [SerializeField] private float cabooseSpeed;
 
@@ -178,6 +179,23 @@ public class TrainManager : MonoBehaviour
         {
             timer -= Time.deltaTime;
             timerText.text = ((int)timer).ToString();
+            bool isCorrect = true;
+            for (int i = 0; i < path.Count; i++)
+            {
+                if (path[i].IsRotatedCorrectly())
+                    path[i].GetComponent<MeshRenderer>().material = correctTracks[path[i].pieceType];
+                else
+                {
+                    path[i].GetComponent<MeshRenderer>().material = tracks[path[i].pieceType];
+                    isCorrect = false;
+                }
+            }
+
+            if (isCorrect)
+            {
+                timer = 0f;
+                Destroy(timerText.gameObject);
+            }
             yield return null;
         }
         foreach (Cell c in grid)
