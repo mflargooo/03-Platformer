@@ -46,7 +46,7 @@ public class CapybaraCluster : MonoBehaviour
             spriteObj.GetChild(0).GetChild(5).gameObject.SetActive(true);
 
         capybaras[capybaraOrder.Count].SetActive(true);
-        capybaraOrder.Add(i);
+        capybaraOrder.Add(capybaraOrder.Count);
     }
 
     IEnumerator Follow(int i)
