@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collect2d : MonoBehaviour,IInteractable
+public class Collect2d : MonoBehaviour, IInteractable
 {
+    public GameController gameController;
+
     public void Interact()
     {
         CollectItem();
@@ -11,7 +13,11 @@ public class Collect2d : MonoBehaviour,IInteractable
 
     private void CollectItem()
     {
-        //to be continue
+        if (gameController != null)
+        {
+            gameController.ItemCollected();
+        }
         Destroy(gameObject);
     }
 }
+

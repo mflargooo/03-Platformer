@@ -43,6 +43,8 @@ public class KaraokeManager : MonoBehaviour
     [SerializeField] private GameObject puzzleUI;
     [SerializeField] private GameObject puzzleToggle;
     [SerializeField] private LockedCafeDoor lockedDoor;
+    [SerializeField] private GameObject closedDoor;
+    [SerializeField] private GameObject openedDoor;
 
     [SerializeField] private Button hintButton;
 
@@ -166,10 +168,14 @@ public class KaraokeManager : MonoBehaviour
     void CompletedPuzzle()
     {
         GameObject door = lockedDoor.gameObject;
+        GameObject door_closed = closedDoor.gameObject;
+        GameObject door_opened = openedDoor.gameObject;
         door.layer = 0;
         CloseDragMenu();
         SoundManager.PlayDoorUnlockSound();
         Destroy(door);
+        door_closed.SetActive(false);
+        door_opened.SetActive(true);
     }
 
     public void Verify()
