@@ -60,7 +60,7 @@ public class CapybaraCluster : MonoBehaviour
         if (i < 6)
             anim = capybara.transform.GetChild(0).GetComponent<Animator>();
         
-        while(true)
+        while(player.GetComponent<PlayerController2D>())
         {
             while(!rb.gameObject.activeInHierarchy)
             {

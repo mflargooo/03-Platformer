@@ -24,7 +24,7 @@ public class CameraViewManager : MonoBehaviour
         kpc = karaokePuzzleCam;
         tpc = trainPuzzleCam;
         pl = player;
-        DisplayMain();
+        DisplayKaraokeMenu();
     }
 
     public static void SetCurrLevel(GameObject obj)
@@ -40,6 +40,16 @@ public class CameraViewManager : MonoBehaviour
         kpc.gameObject.SetActive(false);
         kpc.gameObject.SetActive(false);
         pl.SetActive(true);
+    }
+
+    public static void DisplayKaraokeMenu()
+    {
+        if (currLevel) currLevel.SetActive(true);
+        mc.gameObject.SetActive(false);
+        kmc.gameObject.SetActive(true);
+        kpc.gameObject.SetActive(false);
+        kpc.gameObject.SetActive(false);
+        pl.SetActive(false);
     }
 
     public static void DisplayKaraokePuzzle()

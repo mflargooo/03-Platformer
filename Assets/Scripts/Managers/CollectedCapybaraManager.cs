@@ -13,7 +13,6 @@ public class CollectedCapybaraManager : MonoBehaviour
     void Start()
     {
         numCapybaraNotes = capybaras.Length;
-        SetupList();
         DeactivateCapybaraList();
     }
 
