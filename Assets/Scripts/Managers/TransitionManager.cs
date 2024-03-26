@@ -41,7 +41,7 @@ public class TransitionManager : MonoBehaviour
         pc.transform.position = target.position + Vector3.right * lookDir;
         playerRB.velocity = Vector2.right * pc.GetSpeed() * lookDir;
 
-        yield return new WaitForSeconds(.75f);
+        yield return new WaitForSeconds(1f);
         bpAnim.Play("FadeIn");
         yield return new WaitForSeconds(.25f);
 

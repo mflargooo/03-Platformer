@@ -5,11 +5,13 @@ using UnityEngine;
 public class CameraViewManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCam;
+    [SerializeField] private Camera karaokeMenuCam;
     [SerializeField] private Camera karaokePuzzleCam;
     [SerializeField] private Camera trainPuzzleCam;
 
     [SerializeField] private GameObject player;
     private static Camera mc;
+    private static Camera kmc;
     private static Camera kpc;
     private static Camera tpc;
     private static GameObject pl;
@@ -18,6 +20,7 @@ public class CameraViewManager : MonoBehaviour
     private void Start()
     {
         mc = mainCam;
+        kmc = karaokeMenuCam;
         kpc = karaokePuzzleCam;
         tpc = trainPuzzleCam;
         pl = player;
@@ -33,6 +36,7 @@ public class CameraViewManager : MonoBehaviour
     {
         if (currLevel) currLevel.SetActive(true);
         mc.gameObject.SetActive(true);
+        kmc.gameObject.SetActive(false);
         kpc.gameObject.SetActive(false);
         kpc.gameObject.SetActive(false);
         pl.SetActive(true);

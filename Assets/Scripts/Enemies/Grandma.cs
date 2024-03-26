@@ -27,13 +27,13 @@ public class Grandma : MonoBehaviour
 
     public void StartBoss()
     {
-        StartCoroutine(SpawnOni());
-        healthBar.gameObject.SetActive(true);
+        StartCoroutine(BossLogic());
     }
 
-    IEnumerator SpawnOni()
+    IEnumerator BossLogic()
     {
         yield return new WaitForSeconds(timeUntilBossStart);
+        healthBar.gameObject.SetActive(true);
         while (true)
         {
             yield return null;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TrainManager : MonoBehaviour
 {
@@ -245,8 +246,15 @@ public class TrainManager : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             Debug.Log(caboose.name + " ended with Fail");
+            yield return new WaitForSeconds(1f);
+            SceneManager.LoadScene(0);
         }
-        else Debug.Log(caboose.name + " ended with Success");
+        else
+        {
+            Debug.Log(caboose.name + " ended with Success");
+            yield return new WaitForSeconds(1f);
+            GetComponent<PuzzleSuccess>().Succeed();
+        }
     }
 
     void SetTrackInfo (Track track, char cellType)

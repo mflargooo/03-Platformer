@@ -49,7 +49,6 @@ public class KaraokeManager : MonoBehaviour
 
     private void Start()
     {
-        HardPuzzle();
         puzzleToggle.SetActive(false);
     }
 
