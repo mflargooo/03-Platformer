@@ -326,23 +326,23 @@ MonoBehaviour:
   karaokeAS: {fileID: 27415817}
   falseSolnClip: {fileID: 8300000, guid: df3ca02ad5a9b487391e29ef9371d893, type: 3}
   easySolution: 060000000400000002000000
-  mediumSolution: 0400000006000000010000000000000002000000
+  mediumSolution: 0400000006000000010000000000000003000000
   hardSolution: 03000000040000000500000006000000000000000200000001000000
   easyNotes:
-  - {fileID: 8300000, guid: 2cd48dadba0fc4b72a4a32acf317cfd4, type: 3}
-  - {fileID: 8300000, guid: 1f52e17e618ce4d51ba78827fa2cf9b3, type: 3}
+  - {fileID: 8300000, guid: bfc0c15c8406e40dba1551aebf6d1c20, type: 3}
+  - {fileID: 8300000, guid: c71db81f6d1454744a380eeabeda2b46, type: 3}
   - {fileID: 8300000, guid: 35935acf8cf244f51aa6fbfa91152bb4, type: 3}
-  - {fileID: 8300000, guid: fe6f09c7c240542dd83bd878c4774f7f, type: 3}
+  - {fileID: 8300000, guid: bfc0c15c8406e40dba1551aebf6d1c20, type: 3}
   - {fileID: 8300000, guid: 164d6d04d527d4c6283e243e13035af6, type: 3}
-  - {fileID: 8300000, guid: eb805c8b8d3484c9cb89e8754c4a3c10, type: 3}
+  - {fileID: 8300000, guid: c71db81f6d1454744a380eeabeda2b46, type: 3}
   - {fileID: 8300000, guid: 9634122f1d8734d2e9870e454b7ade27, type: 3}
   mediumNotes:
   - {fileID: 8300000, guid: cda161be57e57423cb32f8919ca9a4a3, type: 3}
   - {fileID: 8300000, guid: e216e19fc21874a8fb3c482c2aa9883e, type: 3}
-  - {fileID: 8300000, guid: 35935acf8cf244f51aa6fbfa91152bb4, type: 3}
+  - {fileID: 8300000, guid: c71db81f6d1454744a380eeabeda2b46, type: 3}
   - {fileID: 8300000, guid: ce7c5e7103aff441485b3051cd4d3840, type: 3}
   - {fileID: 8300000, guid: fe6f09c7c240542dd83bd878c4774f7f, type: 3}
-  - {fileID: 8300000, guid: 44f5856b00ead4a68a507fbcf120661a, type: 3}
+  - {fileID: 8300000, guid: bfc0c15c8406e40dba1551aebf6d1c20, type: 3}
   - {fileID: 8300000, guid: e3dc4486130124189b0bdd053374daa2, type: 3}
   hardNotes:
   - {fileID: 8300000, guid: 2cd48dadba0fc4b72a4a32acf317cfd4, type: 3}
