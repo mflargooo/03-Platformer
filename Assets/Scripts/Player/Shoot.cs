@@ -63,6 +63,8 @@ public class Shoot : MonoBehaviour
         cc.GetCapybaraTransform(id).gameObject.SetActive(false);
 
         currProjCount--;
+
+        SoundManager.PlayThrowSound();
     }
 
     public void IncrementProjCount()

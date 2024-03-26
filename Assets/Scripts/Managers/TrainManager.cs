@@ -153,8 +153,13 @@ public class TrainManager : MonoBehaviour
         /* Randomize correct path rotations */
         for (int i = 1; i < path.Count - 1; i++)
         {
-            path[i].transform.eulerAngles = new Vector3(90, Random.Range(0, 4) * 90, transform.eulerAngles.z);
-            path[i].IsRotatedCorrectly();
+            int iters = 0;
+            while (path[i].IsRotatedCorrectly() || iters < 500)
+            {
+                path[i].transform.eulerAngles = new Vector3(90, Random.Range(0, 4) * 90, transform.eulerAngles.z);
+                iters++;
+            }
+            
         }
 
         foreach (Cell c in grid)
@@ -212,8 +217,18 @@ public class TrainManager : MonoBehaviour
 
     private IEnumerator SpawnCaboose()
     {
+        SoundManager.PlayTrainWhistleSound();
+        yield return new WaitForSeconds(SoundManager.twsnd.length);
+
         for (int i = 0; i < 3 && !cabooseFailed; i++)
         {
+            if (i == 0)
+            {
+                SoundManager.tcsrc.clip = SoundManager.tcsnd;
+                SoundManager.tcsrc.loop = true;
+                SoundManager.tcsrc.Play();
+            }
+
             GameObject caboose = Instantiate(caboosePrefab, path[0].transform.position + Vector3.up * .01f - Vector3.forward * 1f, caboosePrefab.transform.rotation);
             cabooses[i] = caboose;
             caboose.transform.parent = transform;
@@ -247,12 +262,15 @@ public class TrainManager : MonoBehaviour
             rb.velocity = Vector3.zero;
             Debug.Log(caboose.name + " ended with Fail");
             yield return new WaitForSeconds(1f);
+            SoundManager.tcsrc.Stop();
             SceneManager.LoadScene(0);
         }
         else
         {
             Debug.Log(caboose.name + " ended with Success");
             yield return new WaitForSeconds(1f);
+            if (int.Parse(caboose.name.Substring(caboose.name.Length - 1)) == 2)
+                SoundManager.tcsrc.Stop();
             GetComponent<PuzzleSuccess>().Succeed();
         }
     }

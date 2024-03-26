@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLaunchSpeed: 10
-  shootCooldown: 0.35
+  shootCooldown: 0.3
   capybaraProjectile: {fileID: 1724191404554039789, guid: dfa8763ab4eb7f84b81d46c54ee8dfbe,
     type: 3}
 --- !u!114 &8998038642940420837

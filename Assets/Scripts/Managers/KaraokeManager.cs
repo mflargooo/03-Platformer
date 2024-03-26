@@ -168,8 +168,8 @@ public class KaraokeManager : MonoBehaviour
         GameObject door = lockedDoor.gameObject;
         door.layer = 0;
         CloseDragMenu();
-        Destroy(lockedDoor);
-        Destroy(door); /* Play door anim instead */
+        SoundManager.PlayDoorUnlockSound();
+        Destroy(door);
     }
 
     public void Verify()

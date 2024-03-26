@@ -32,6 +32,7 @@ public class Oni : MonoBehaviour
         health--;
         if(health <= 0)
         {
+            SoundManager.PlayOniDeathSound();
             Destroy(gameObject);
         }
     }

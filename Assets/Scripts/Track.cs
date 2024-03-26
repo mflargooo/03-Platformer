@@ -15,6 +15,8 @@ public class Track : Cell
         if (locked) return;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.RoundToInt((transform.eulerAngles.y + 90) % 360), transform.eulerAngles.z);
         isCorrect = IsRotatedCorrectly();
+
+        SoundManager.PlayTrackRotateSound();
     }
 
     public void SetPieceType(int type)

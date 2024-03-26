@@ -40,6 +40,8 @@ public class CameraViewManager : MonoBehaviour
         kpc.gameObject.SetActive(false);
         kpc.gameObject.SetActive(false);
         pl.SetActive(true);
+        SoundManager.instance.transform.parent = mc.transform;
+        SoundManager.instance.transform.localPosition = Vector3.zero;
     }
 
     public static void DisplayKaraokeMenu()
@@ -59,6 +61,8 @@ public class CameraViewManager : MonoBehaviour
         kpc.gameObject.SetActive(true);
         tpc.gameObject.SetActive(false);
         pl.SetActive(false);
+        SoundManager.instance.transform.parent = kpc.transform;
+        SoundManager.instance.transform.localPosition = Vector3.zero;
     }
 
     public static void DisplayTrainPuzzle()
@@ -68,5 +72,7 @@ public class CameraViewManager : MonoBehaviour
         kpc.gameObject.SetActive(false);
         tpc.gameObject.SetActive(true);
         pl.SetActive(false);
+        SoundManager.instance.transform.parent = tpc.transform;
+        SoundManager.instance.transform.localPosition = Vector3.zero;
     }
 }

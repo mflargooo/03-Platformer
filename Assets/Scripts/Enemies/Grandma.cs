@@ -33,6 +33,7 @@ public class Grandma : MonoBehaviour
     IEnumerator BossLogic()
     {
         yield return new WaitForSeconds(timeUntilBossStart);
+        SoundManager.PlayBossCackleSound();
         healthBar.gameObject.SetActive(true);
         while (true)
         {
@@ -82,7 +83,14 @@ public class Grandma : MonoBehaviour
                     Destroy(spawnedOni[i].gameObject);
             }
             Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SoundManager.PlayBossDeathSound();
+            StartCoroutine(LoadEndScreen());
         }
+    }
+
+    IEnumerator LoadEndScreen()
+    {
+        yield return new WaitForSeconds(SoundManager.bcsnd.length);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
