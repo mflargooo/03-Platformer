@@ -52,7 +52,7 @@ public class PlayerController2D : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
         groundCheckPoints[0].localPosition = col.offset - col.size / 2;
         groundCheckPoints[1].localPosition = col.offset + new Vector2(col.size.x / 2, -col.size.y / 2);
         headCheckPoints[0].localPosition = col.offset + new Vector2(-col.size.x / 2, col.size.y / 2);

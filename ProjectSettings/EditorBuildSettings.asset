@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Karaoke.unity
     guid: 53c3c16a7b12b274ab8d498b4170edd7
+  - enabled: 1
+    path: Assets/Scenes/Fuji.unity
+    guid: efcce14c85a574f0fb72f95ff3a4e257
   m_configObjects: {}
