@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: roof 2
   m_Shader: {fileID: 4800000, guid: 60e29b7951f20da47b11861d166b7036, type: 3}
-  m_Parent: {fileID: 2100000, guid: cc2ed95c2915a234d8db10e37be7032f, type: 2}
+  m_Parent: {fileID: 2100000, guid: cd5402777b42fa944ae2b48afc5fce06, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _OUTLINETYPE_NORMAL
