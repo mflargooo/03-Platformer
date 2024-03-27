@@ -270,7 +270,10 @@ public class TrainManager : MonoBehaviour
             Debug.Log(caboose.name + " ended with Success");
             yield return new WaitForSeconds(1f);
             if (int.Parse(caboose.name.Substring(caboose.name.Length - 1)) == 2)
+            {
                 SoundManager.tcsrc.Stop();
+                Destroy(SoundManager.tcsrc.gameObject);
+            }
 
             Destroy(caboose, .5f);
             GetComponent<PuzzleSuccess>().Succeed();
