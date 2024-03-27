@@ -289,8 +289,6 @@ MonoBehaviour:
   puzzleUI: {fileID: 563813795}
   puzzleToggle: {fileID: 889618587}
   lockedDoor: {fileID: 867053212}
-  closedDoor: {fileID: 4142722500950030989}
-  openedDoor: {fileID: 0}
   hintButton: {fileID: 839283743}
 --- !u!114 &27415816
 MonoBehaviour:
@@ -17643,6 +17641,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.77
       objectReference: {fileID: 0}
+    - target: {fileID: 414506558529154258, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -93.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 414506558529154258, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 30.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 414506558529154258, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.23822
+      objectReference: {fileID: 0}
+    - target: {fileID: 753985248168677607, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: ticketSpawns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 753985248168677607, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: ticketSpawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1000707511481303246, guid: aa6e79bc2d951433080ca6616270f847,
         type: 3}
       propertyPath: m_Size.x
@@ -17743,6 +17766,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tokyo
       objectReference: {fileID: 0}
+    - target: {fileID: 6440330995256445431, guid: aa6e79bc2d951433080ca6616270f847,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6935594677705048967, guid: aa6e79bc2d951433080ca6616270f847,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17799,6 +17827,8 @@ PrefabInstance:
     - {fileID: 7891161615198875715, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
     - {fileID: 4112589388980052677, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
     - {fileID: 2540505461477779631, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
+    - {fileID: 1596982502669153130, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
+    - {fileID: 753985248168677607, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3320763006922473836, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
     - {fileID: 1864211456697104777, guid: aa6e79bc2d951433080ca6616270f847, type: 3}
@@ -17940,7 +17970,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.00000023841858}
@@ -21812,7 +21842,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24908,12 +24938,6 @@ PrefabInstance:
 --- !u!4 &4142722500950030988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1818978356214756469, guid: 9850ae198d7414f6caa0a97e6bfe6601,
-    type: 3}
-  m_PrefabInstance: {fileID: 4142722500950030987}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4142722500950030989 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1330144645165723343, guid: 9850ae198d7414f6caa0a97e6bfe6601,
     type: 3}
   m_PrefabInstance: {fileID: 4142722500950030987}
   m_PrefabAsset: {fileID: 0}

@@ -41,6 +41,7 @@ public class TicketSpawner : MonoBehaviour
         if (moveCoroutine != null)
             StopCoroutine(moveCoroutine);
 
+        if (ticketSpawns.Length == 0) return;
         int randomIndex = Random.Range(0, ticketSpawns.Length);
         Vector3 newPosition = (Vector2)ticketSpawns[randomIndex].position;
         moveCoroutine = StartCoroutine(TransitionToNewPosition(newPosition));
