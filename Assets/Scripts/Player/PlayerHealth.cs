@@ -50,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0f)
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            Destroy(gameObject.GetComponent<Shoot>());
             Destroy(gameObject.GetComponent<PlayerController2D>());
             anim.Play("player_death");
             GetComponent<Rigidbody2D>().gravityScale = 2f;
