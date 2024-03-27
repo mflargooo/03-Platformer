@@ -42,29 +42,32 @@ public class TicketSpawner : MonoBehaviour
             StopCoroutine(moveCoroutine);
 
         int randomIndex = Random.Range(0, ticketSpawns.Length);
-        Vector3 newPosition = ticketSpawns[randomIndex].position;
+        Vector3 newPosition = (Vector2)ticketSpawns[randomIndex].position;
         moveCoroutine = StartCoroutine(TransitionToNewPosition(newPosition));
     }
 
     IEnumerator TransitionToNewPosition(Vector3 newPosition)
     {
-        Vector3 startPos = ticket.transform.position;
-        float t = 0.0f;
-
-        while (t < 1.0f)
+        if (ticket)
         {
-            t += Time.deltaTime / transitionDuration;
-            ticket.transform.position = Vector3.Lerp(startPos, newPosition, t);
-            yield return null;
-        }
+            Vector3 startPos = ticket.transform.position;
+            float t = 0.0f;
 
-        ticket.transform.position = newPosition;
+            while (t < 1.0f)
+            {
+                t += Time.deltaTime / transitionDuration;
+                ticket.transform.position = Vector3.Lerp(startPos, newPosition, t);
+                yield return null;
+            }
+
+            ticket.transform.position = newPosition;
 
 
-        FloatingObject floatingObject = ticket.GetComponent<FloatingObject>();
-        if (floatingObject != null)
-        {
-            floatingObject.UpdateStartPosition(newPosition);
+            FloatingObject floatingObject = ticket.GetComponent<FloatingObject>();
+            if (floatingObject != null)
+            {
+                floatingObject.UpdateStartPosition(newPosition);
+            }
         }
     }
 }
