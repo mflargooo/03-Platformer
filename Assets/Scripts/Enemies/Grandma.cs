@@ -82,7 +82,6 @@ public class Grandma : MonoBehaviour
                 if(spawnedOni[i])
                     Destroy(spawnedOni[i].gameObject);
             }
-            Destroy(gameObject);
             SoundManager.PlayBossDeathSound();
             StartCoroutine(LoadEndScreen());
         }
@@ -90,7 +89,8 @@ public class Grandma : MonoBehaviour
 
     IEnumerator LoadEndScreen()
     {
-        yield return new WaitForSeconds(SoundManager.bcsnd.length);
+        yield return new WaitForSeconds(SoundManager.bdsnd.length);
+        Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
