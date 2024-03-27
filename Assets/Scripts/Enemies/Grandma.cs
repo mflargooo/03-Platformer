@@ -27,6 +27,7 @@ public class Grandma : MonoBehaviour
 
     public void StartBoss()
     {
+        Cursor.visible = true;
         StartCoroutine(BossLogic());
     }
 
@@ -75,13 +76,16 @@ public class Grandma : MonoBehaviour
     {
         healthBar.value -= damage;
 
-        if(healthBar.value == 0)
+        if(healthBar.value <= 0)
         {
             for(int i = 0; i < spawnedOni.Count; i++)
             {
                 if(spawnedOni[i])
                     Destroy(spawnedOni[i].gameObject);
             }
+            Destroy(GetComponent<SpriteRenderer>());
+            Destroy(healthBar.gameObject);
+            Destroy(GetComponent<Collider2D>());
             SoundManager.PlayBossDeathSound();
             StartCoroutine(LoadEndScreen());
         }
@@ -90,7 +94,6 @@ public class Grandma : MonoBehaviour
     IEnumerator LoadEndScreen()
     {
         yield return new WaitForSeconds(SoundManager.bdsnd.length);
-        Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
