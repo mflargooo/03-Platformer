@@ -7918,7 +7918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &750610441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15221,7 +15221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1818184315}
   maxHealth: 20
-  timeUntilBossStart: 2
+  timeUntilBossStart: 2.5
   oniSpawnpoints:
   - {fileID: 2122708551}
   - {fileID: 810019631}
@@ -18573,7 +18573,7 @@ Transform:
   m_GameObject: {fileID: 1620246043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.84, y: -2.67, z: 0}
+  m_LocalPosition: {x: -64.38, y: -2.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21791,7 +21791,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -21818,7 +21818,7 @@ Transform:
   m_GameObject: {fileID: 1918491035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.4, y: 4.69, z: -15}
+  m_LocalPosition: {x: 246.0043, y: 2.0621984, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24598,7 +24598,7 @@ PrefabInstance:
     - target: {fileID: 2697382560399818049, guid: 8cd25b2e537a85b41bdc4e9b4db502bb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.57
+      value: 7.44
       objectReference: {fileID: 0}
     - target: {fileID: 2887704573145552960, guid: 8cd25b2e537a85b41bdc4e9b4db502bb,
         type: 3}
