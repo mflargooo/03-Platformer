@@ -271,6 +271,8 @@ public class TrainManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (int.Parse(caboose.name.Substring(caboose.name.Length - 1)) == 2)
                 SoundManager.tcsrc.Stop();
+
+            Destroy(caboose, .5f);
             GetComponent<PuzzleSuccess>().Succeed();
         }
     }
