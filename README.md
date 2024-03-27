@@ -31,8 +31,19 @@ RELEASE NOTES
                 - Reworked Karaoke Puzzle and Cafe Scene
                 - Added transitions between scenes
                 - Linked Cafe to Tokyo, and Tokyo to Subway station
-                - Added shooting of capybara
+                - Added capybara throwing
                 - Fixed player movement and collision detection
+
+        () Final Build
+
+                - Capybara friends now cluster and follow the player
+                - Added Oni animations and logic
+                - Added Nekono boss logic and boss fight
+                - Created train station and train scenes
+                - Created end Mt. Fuji scene
+                - Modified parameters of player throwing, and player now throws his capy friends
+                - Fleshed out and intertwined all the levels
+                - Added intro cutscene and menu UI
 
 ATTRIBUTIONS 
 

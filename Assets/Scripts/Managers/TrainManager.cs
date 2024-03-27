@@ -262,6 +262,7 @@ public class TrainManager : MonoBehaviour
             rb.velocity = Vector3.zero;
             Debug.Log(caboose.name + " ended with Fail");
             yield return new WaitForSeconds(1f);
+            SoundManager.tcsrc.loop = false;
             SoundManager.tcsrc.Stop();
             SceneManager.LoadScene(0);
         }
@@ -271,6 +272,7 @@ public class TrainManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (int.Parse(caboose.name.Substring(caboose.name.Length - 1)) == 2)
             {
+                SoundManager.tcsrc.loop = false;
                 SoundManager.tcsrc.Stop();
                 Destroy(SoundManager.tcsrc.gameObject);
             }
