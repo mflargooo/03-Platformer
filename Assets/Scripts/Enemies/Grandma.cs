@@ -39,7 +39,7 @@ public class Grandma : MonoBehaviour
         while (healthBar.value > 0)
         {
             yield return null;
-            if (spawnedOni.Count > 0)
+            if (spawnedOni.Count > 0 && healthBar.value > 0)
             {
                 for (int i = 0; i < spawnedOni.Count; i++)
                 {
@@ -53,7 +53,7 @@ public class Grandma : MonoBehaviour
             yield return new WaitForSeconds(.5f);
 
             int num = Random.Range(minOniSpawn, maxOniSpawn + 1);
-            for (int i = 0; i < num; i++)
+            for (int i = 0; i < num && healthBar.value > 0; i++)
             {
                 Transform spawnpoint = oniSpawnpoints[Random.Range(0, oniSpawnpoints.Length)];
                 Oni oni = Instantiate(oniPrefab, spawnpoint.position, oniPrefab.transform.rotation);
@@ -83,7 +83,7 @@ public class Grandma : MonoBehaviour
                 if(spawnedOni[i])
                     Destroy(spawnedOni[i].gameObject);
             }
-            Destroy(transform.GetChild(0).GetComponent<SpriteRenderer>());
+            Destroy(transform.GetChild(0).gameObject);
             Destroy(healthBar.gameObject);
             Destroy(GetComponent<Collider2D>());
             SoundManager.PlayBossDeathSound();

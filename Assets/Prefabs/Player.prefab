@@ -851,7 +851,7 @@ MonoBehaviour:
   spriteRend: {fileID: 52368302393441143}
   anim: {fileID: 3811015105219132544}
   heartContainer: {fileID: 5372182345880668265}
-  heartSpacing: 50
+  heartSpacing: 75
 --- !u!61 &7912810322763063641
 BoxCollider2D:
   m_ObjectHideFlags: 0
