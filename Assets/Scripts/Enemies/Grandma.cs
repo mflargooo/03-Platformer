@@ -36,7 +36,7 @@ public class Grandma : MonoBehaviour
         yield return new WaitForSeconds(timeUntilBossStart);
         SoundManager.PlayBossCackleSound();
         healthBar.gameObject.SetActive(true);
-        while (true)
+        while (healthBar.value > 0)
         {
             yield return null;
             if (spawnedOni.Count > 0)
@@ -83,7 +83,7 @@ public class Grandma : MonoBehaviour
                 if(spawnedOni[i])
                     Destroy(spawnedOni[i].gameObject);
             }
-            Destroy(GetComponent<SpriteRenderer>());
+            Destroy(transform.GetChild(0).GetComponent<SpriteRenderer>());
             Destroy(healthBar.gameObject);
             Destroy(GetComponent<Collider2D>());
             SoundManager.PlayBossDeathSound();
